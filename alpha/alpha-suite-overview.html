@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan Alpha &mdash; Suite Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .banner {
+      width: 1200px; height: 630px;
+      background:
+        radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
+        linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
+      color: #F2F0EE;
+      padding: 60px 70px 50px;
+      display: flex; flex-direction: column; gap: 28px;
+      position: relative; overflow: hidden;
+      border-radius: 16px;
+    }
+    .banner::after { content: ''; position: absolute; top: 0; right: 0; width: 360px; height: 5px; background: linear-gradient(90deg, transparent, #F4D5B1); }
+    .head { display: flex; justify-content: space-between; align-items: flex-start; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .icon-mark { width: 50px; height: 50px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); border-radius: 12px; display: grid; place-items: center; color: #0E0E0F; font-weight: 800; font-size: 26px; }
+    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; font-size: 24px; }
+    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
+    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+    .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+    .alpha-tag { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 9999px; background: rgba(244, 213, 177, 0.15); color: #F4D5B1; border: 1px solid rgba(244, 213, 177, 0.30); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+
+    .title-block .name { font-size: 48px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; }
+    .title-block .name .accent { background: linear-gradient(120deg, #F4D5B1, #FFD29F); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .title-block .tag { font-size: 18px; color: #B9B5B0; margin-top: 6px; }
+
+    .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .tool { background: rgba(22, 22, 24, 0.6); border: 1px solid #26262A; border-radius: 12px; padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+    .tool .tool-emoji { font-size: 24px; line-height: 1; }
+    .tool .tool-name { font-size: 13px; font-weight: 700; line-height: 1.2; }
+    .tool .tool-blurb { font-size: 11px; color: #7A7770; line-height: 1.4; }
+
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 4px; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #F2F0EE; opacity: 0.85; }
+    .by  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="head">
+    <div class="brand">
+      <div class="icon-mark">&#10033;</div>
+      <div>
+        <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
+        <div class="meta">Alpha suite</div>
+      </div>
+    </div>
+    <div class="alpha-tag">5 tools &middot; live</div>
+  </div>
+
+  <div class="title-block">
+    <div class="name">The Alpha <span class="accent">suite.</span></div>
+    <div class="tag">Five tools that read what the chain doesn&apos;t say out loud.</div>
+  </div>
+
+  <div class="grid">
+    <div class="tool">
+      <div class="tool-emoji">&#x1FA9E;</div>
+      <div class="tool-name">Smart Money Mirror</div>
+      <div class="tool-blurb">Wallets that move before the move.</div>
+    </div>
+    <div class="tool">
+      <div class="tool-emoji">&#x1F512;</div>
+      <div class="tool-name">Private Mirror</div>
+      <div class="tool-blurb">Privacy adoption + cipher heatmap.</div>
+    </div>
+    <div class="tool">
+      <div class="tool-emoji">&#x1F52C;</div>
+      <div class="tool-name">Validator X-Ray</div>
+      <div class="tool-blurb">Concentration + oracle deviation.</div>
+    </div>
+    <div class="tool">
+      <div class="tool-emoji">&#x1F9CA;</div>
+      <div class="tool-name">Iceberg Hunter</div>
+      <div class="tool-blurb">Split-order heuristic detection.</div>
+    </div>
+    <div class="tool">
+      <div class="tool-emoji">&#x1F32A;&#xFE0F;</div>
+      <div class="tool-name">Liquidation Forecaster</div>
+      <div class="tool-blurb">Forward cascade simulation.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="url">aster-scan.com/alpha</div>
+    <div class="by">Beta &middot; signal-grade analytics</div>
+  </div>
+</div>
+
+</body>
+</html>

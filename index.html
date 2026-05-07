@@ -9,14 +9,48 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: #0E0E0F; color: #F2F0EE; font-family: 'DM Sans', system-ui, sans-serif; }
-    body { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
 
-    .head { display: flex; align-items: center; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid #26262A; margin-bottom: 36px; }
-    .mark { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); display: grid; place-items: center; color: #0E0E0F; font-size: 28px; font-weight: 800; flex-shrink: 0; }
+    .layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky; top: 0; align-self: start;
+      height: 100vh; overflow-y: auto;
+      border-right: 1px solid #26262A;
+      background: #0E0E0F;
+      padding: 28px 22px;
+    }
+    @media (max-width: 860px) {
+      .sidebar { position: relative; height: auto; border-right: 0; border-bottom: 1px solid #26262A; }
+    }
+    .sb-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .sb-brand .mark { width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); display: grid; place-items: center; color: #0E0E0F; font-size: 18px; font-weight: 800; }
+    .sb-brand .name { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; font-size: 13px; }
+    .sb-brand .name .aster { font-weight: 700; color: #F4D5B1; }
+    .sb-brand .name .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+
+    .sb-section { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #7A7770; margin: 22px 0 8px; }
+    .sb-section:first-of-type { margin-top: 0; }
+    .sb-link { display: block; padding: 6px 8px; margin: 0 -8px; border-radius: 6px; font-size: 13px; color: #B9B5B0; text-decoration: none; transition: background 120ms, color 120ms; }
+    .sb-link:hover { background: #161618; color: #F2F0EE; }
+    .sb-link .pill {
+      display: inline-block; vertical-align: middle; margin-left: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.16em;
+      padding: 2px 5px; border-radius: 3px;
+      background: rgba(244, 213, 177, 0.12); color: #F4D5B1;
+    }
+
+    /* Main */
+    main { padding: 50px 48px 80px; max-width: 1100px; }
+    @media (max-width: 720px) { main { padding: 32px 20px 48px; } }
+
+    .head { display: flex; align-items: center; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid #26262A; margin-bottom: 30px; }
+    .mark-lg { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); display: grid; place-items: center; color: #0E0E0F; font-size: 28px; font-weight: 800; flex-shrink: 0; }
     .head h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
     .head p  { font-size: 13px; color: #7A7770; margin-top: 4px; }
 
-    h2 { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #B9B5B0; margin: 36px 0 14px; }
+    h2 { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #B9B5B0; margin: 36px 0 14px; scroll-margin-top: 24px; }
     h2 .count { font-family: 'JetBrains Mono', monospace; color: #F4D5B1; margin-left: 8px; }
     p.lead { font-size: 14px; color: #B9B5B0; line-height: 1.55; max-width: 720px; }
 
@@ -40,6 +74,13 @@
     .card .name { font-size: 14px; font-weight: 600; color: #F2F0EE; }
     .card .desc { font-size: 12px; color: #7A7770; line-height: 1.4; }
     .card .meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #B9B5B0; margin-top: 4px; }
+    .card .badge {
+      display: inline-block; align-self: flex-start;
+      font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em;
+      padding: 2px 6px; border-radius: 4px;
+      background: rgba(244, 213, 177, 0.15); color: #F4D5B1;
+      margin-bottom: 4px; text-transform: uppercase;
+    }
 
     .preview-card {
       background: #161618;
@@ -60,6 +101,19 @@
     .preview-card .meta-bar .label { font-size: 12px; font-weight: 600; }
     .preview-card .meta-bar .dim { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; letter-spacing: 0.1em; text-transform: uppercase; }
 
+    /* Logo lockup — uses HTML+CSS wordmark to match the live navbar exactly */
+    .lockup {
+      background: #161618; border: 1px solid #26262A; border-radius: 14px;
+      padding: 32px; display: flex; align-items: center; gap: 20px;
+      margin-bottom: 14px;
+    }
+    .lockup .lk-mark { width: 56px; height: 56px; flex-shrink: 0; display: grid; place-items: center; }
+    .lockup .lk-mark img { width: 100%; height: 100%; object-fit: contain; }
+    .lockup .wordmark-display { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; letter-spacing: 0.14em; line-height: 1; display: inline-flex; align-items: baseline; gap: 1px; }
+    .lockup .wordmark-display .aster { color: #F4D5B1; font-weight: 700; }
+    .lockup .wordmark-display .scan  { color: #B9B5B0; font-weight: 400; opacity: 0.7; }
+    .lockup .lk-meta { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; }
+
     .swatch-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
     @media (max-width: 720px) { .swatch-row { grid-template-columns: repeat(2, 1fr); } }
     .swatch { background: var(--c); border-radius: 10px; padding: 14px; min-height: 80px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,0.05); }
@@ -72,165 +126,245 @@
     a { color: #F4D5B1; }
 
     .pill { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; background: rgba(244, 213, 177, 0.15); color: #F4D5B1; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-left: 8px; }
-  
-    /* Brand wordmark — matches the live navbar: JetBrains Mono with
-       ASTER bold/primary + SCAN regular/muted/opacity-70 + tracking-widest. */
-    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; }
-    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
-    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
-
   </style>
 </head>
 <body>
 
-<div class="head">
-  <div class="mark">✱</div>
-  <div>
-    <h1>AsterScan — UI Partner Kit</h1>
-    <p>Everything for video, motion design, social, marketing. Drop into any tool. <span class="pill">v 2026-05-07</span></p>
-  </div>
-</div>
+<div class="layout">
 
-<p class="lead">
-  Open any item below in your browser, then screenshot / right-click-save / copy SVG / inspect-CSS.
-  Each HTML template renders at its native pixel size — perfect for After Effects compositions, Figma frames, or static social cards.
-</p>
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="mark">✱</div>
+      <div class="name"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
+    </div>
 
-<h2>Logos <span class="count">3</span></h2>
-<div class="grid grid-3">
-  <a class="preview-card" href="/logos/asterscan-logo-compact.svg" target="_blank">
-    <div class="visual bg-light"><img src="/logos/asterscan-logo-compact.svg" alt="" /></div>
-    <div class="meta-bar"><span class="label">Compact</span><span class="dim">SVG</span></div>
-  </a>
-  <a class="preview-card" href="/logos/asterscan-logo-white.svg" target="_blank">
-    <div class="visual"><img src="/logos/asterscan-logo-white.svg" alt="" /></div>
-    <div class="meta-bar"><span class="label">White tile</span><span class="dim">SVG</span></div>
-  </a>
-  <a class="preview-card" href="/logos/asterscan-icon-mark.svg" target="_blank">
-    <div class="visual bg-mid"><img src="/logos/asterscan-icon-mark.svg" alt="" style="max-height: 100px;" /></div>
-    <div class="meta-bar"><span class="label">Icon mark</span><span class="dim">SVG · 100×100</span></div>
-  </a>
-</div>
+    <div class="sb-section">Identity</div>
+    <a class="sb-link" href="#logos">Logos</a>
+    <a class="sb-link" href="#lockup">Logo lockup</a>
+    <a class="sb-link" href="#palette">Brand palette</a>
+    <a class="sb-link" href="#typography">Typography</a>
 
-<h2>Brand palette <span class="count">16 colors</span></h2>
-<div class="swatch-row" style="margin-bottom: 8px;">
-  <div class="swatch light" style="--c:#F4D5B1"><span class="sname">primary</span><span class="shex">#F4D5B1</span></div>
-  <div class="swatch light" style="--c:#FFD29F"><span class="sname">primary-hover</span><span class="shex">#FFD29F</span></div>
-  <div class="swatch light" style="--c:#FFE5C5"><span class="sname">primary-light</span><span class="shex">#FFE5C5</span></div>
-  <div class="swatch dark" style="--c:#0E0E0F; border-color:#26262A"><span class="sname">background</span><span class="shex">#0E0E0F</span></div>
-</div>
-<div class="swatch-row" style="margin-bottom: 8px;">
-  <div class="swatch dark" style="--c:#161618; border-color:#26262A"><span class="sname">surface</span><span class="shex">#161618</span></div>
-  <div class="swatch dark" style="--c:#1C1C1F; border-color:#26262A"><span class="sname">surface-raised</span><span class="shex">#1C1C1F</span></div>
-  <div class="swatch dark" style="--c:#252528; border-color:#26262A"><span class="sname">surface-overlay</span><span class="shex">#252528</span></div>
-  <div class="swatch dark" style="--c:#3A3A3F"><span class="sname">border-strong</span><span class="shex">#3A3A3F</span></div>
-</div>
-<div class="swatch-row" style="margin-bottom: 8px;">
-  <div class="swatch dark" style="--c:#161618; color:#F2F0EE; border-color:#26262A"><span class="sname">text-primary</span><span class="shex">#F2F0EE</span></div>
-  <div class="swatch dark" style="--c:#161618; color:#B9B5B0; border-color:#26262A"><span class="sname">text-secondary</span><span class="shex">#B9B5B0</span></div>
-  <div class="swatch dark" style="--c:#161618; color:#7A7770; border-color:#26262A"><span class="sname">text-muted</span><span class="shex">#7A7770</span></div>
-  <div class="swatch dark" style="--c:#26262A"><span class="sname">border</span><span class="shex">#26262A</span></div>
-</div>
-<div class="swatch-row">
-  <div class="swatch dark" style="--c:#22C55E"><span class="sname">success · long</span><span class="shex">#22C55E</span></div>
-  <div class="swatch dark" style="--c:#EF4444"><span class="sname">danger · short</span><span class="shex">#EF4444</span></div>
-  <div class="swatch dark" style="--c:#F59E0B"><span class="sname">warning · cliff</span><span class="shex">#F59E0B</span></div>
-  <div class="swatch dark" style="--c:#3B82F6"><span class="sname">info</span><span class="shex">#3B82F6</span></div>
-</div>
-<div class="grid grid-2" style="margin-top: 14px;">
-  <a class="card" href="/palette-card.html">
-    <span class="name">Palette card →</span>
-    <span class="desc">Print-ready A4 landscape, all swatches + role descriptions.</span>
-  </a>
-  <a class="card" href="/colors.json">
-    <span class="name">colors.json →</span>
-    <span class="desc">Raw HEX + RGB per token, machine-readable for any tool.</span>
-  </a>
-</div>
+    <div class="sb-section">Components</div>
+    <a class="sb-link" href="#components">UI components</a>
 
-<h2>UI components <span class="count">all atoms</span></h2>
-<p class="lead" style="font-size: 13px; margin-bottom: 14px;">
-  Buttons, badges, cards, stat numbers, table rows, status pills. One specimen page — open and screenshot any element.
-</p>
-<div class="grid grid-2">
-  <a class="card" href="/components.html">
-    <span class="name">UI Components Gallery →</span>
-    <span class="desc">8 component families: buttons (4 variants), badges (6 severities), cards, stat-cards, data-age pills, long/short bar, hover-state table row, logo lockups.</span>
-    <span class="meta">components.html</span>
-  </a>
-  <a class="card" href="/typography/typography-card.html">
-    <span class="name">Typography card →</span>
-    <span class="desc">DM Sans + JetBrains Mono specimen, every size + weight + use case.</span>
-    <span class="meta">typography-card.html</span>
-  </a>
-</div>
+    <div class="sb-section">Video</div>
+    <a class="sb-link" href="#frames">Video frames</a>
 
-<h2>Video frames <span class="count">3 × 1920×1080</span></h2>
-<p class="lead" style="font-size: 13px; margin-bottom: 14px;">
-  Empty brand-skinned frames at 16:9 for After Effects / Premiere. Designer fills the placeholder copy with the actual content.
-</p>
-<div class="grid grid-3">
-  <a class="card" href="/frames/title-card-1920x1080.html">
-    <span class="name">Title card →</span>
-    <span class="desc">Opening / chapter card with brand top, headline middle, URL footer.</span>
-    <span class="meta">title-card-1920x1080.html</span>
-  </a>
-  <a class="card" href="/frames/lower-third-1920x1080.html">
-    <span class="name">Lower third →</span>
-    <span class="desc">Speaker / chapter overlay + stat callout, transparent on top of footage.</span>
-    <span class="meta">lower-third-1920x1080.html</span>
-  </a>
-  <a class="card" href="/frames/end-card-1920x1080.html">
-    <span class="name">End card →</span>
-    <span class="desc">Closing card centered around the icon mark + URL.</span>
-    <span class="meta">end-card-1920x1080.html</span>
-  </a>
-</div>
+    <div class="sb-section">Social</div>
+    <a class="sb-link" href="#social">Social templates</a>
 
-<h2>Social templates <span class="count">5 formats</span></h2>
-<p class="lead" style="font-size: 13px; margin-bottom: 14px;">
-  Empty brand frames for static social posts. Designer fills the headline + sub. No marketing copy baked in.
-</p>
-<div class="grid grid-3">
-  <a class="card" href="/social/og-card-1200x630.html">
-    <span class="name">OG card →</span>
-    <span class="desc">Facebook / LinkedIn / Discord previews.</span>
-    <span class="meta">1200×630</span>
-  </a>
-  <a class="card" href="/social/twitter-card-1200x675.html">
-    <span class="name">Twitter / X card →</span>
-    <span class="desc">X large card preview.</span>
-    <span class="meta">1200×675</span>
-  </a>
-  <a class="card" href="/social/instagram-1080x1080.html">
-    <span class="name">Instagram square →</span>
-    <span class="desc">IG, Threads.</span>
-    <span class="meta">1080×1080</span>
-  </a>
-  <a class="card" href="/social/twitter-banner-1500x500.html">
-    <span class="name">Twitter banner →</span>
-    <span class="desc">Profile banner with avatar safe-zone marked.</span>
-    <span class="meta">1500×500</span>
-  </a>
-  <a class="card" href="/social/github-social-1280x640.html">
-    <span class="name">GitHub social →</span>
-    <span class="desc">Repo social preview, OSS badge style.</span>
-    <span class="meta">1280×640</span>
-  </a>
-</div>
+    <div class="sb-section">Alpha banners <span class="pill">NEW</span></div>
+    <a class="sb-link" href="#alpha">All 6 banners</a>
+  </aside>
 
-<h2>Pro tips for the designer</h2>
-<p class="lead" style="font-size: 13px;">
-  → Open any HTML in Chrome. <strong>Cmd/Ctrl+P</strong> to save as PDF, or use a clean-screenshot tool (Cleanshot, Snagit, Polish) to grab the visible frame at native pixel size.<br/>
-  → Drag the SVG logos directly onto a Figma / Illustrator canvas — fully editable, infinite scale.<br/>
-  → For Adobe After Effects: open the HTML in a browser, use a screen-recorder plugin to capture the rendered frame, drop into your composition.<br/>
-  → For Photoshop: take a 1× screenshot at the native size (1200×630, 1500×500, etc.) — the file dimensions match exactly.<br/>
-  → All HTML files are self-contained — no external CSS / no broken refs — they render identically online and offline.
-</p>
+  <main>
 
-<div class="footer">
-  <span>© Kairos Lab · AsterScan UI Partner Kit · 2026-05-07</span>
-  <a href="https://aster-scan.com">aster-scan.com</a>
+    <div class="head">
+      <div class="mark-lg">✱</div>
+      <div>
+        <h1>AsterScan — UI Partner Kit</h1>
+        <p>Everything for video, motion design, social, marketing. Drop into any tool. <span class="pill">v 2026-05-07</span></p>
+      </div>
+    </div>
+
+    <p class="lead">
+      Open any item below in your browser, then screenshot / right-click-save / copy SVG / inspect-CSS.
+      Each HTML template renders at its native pixel size — perfect for After Effects compositions, Figma frames, or static social cards.
+    </p>
+
+    <h2 id="logos">Logos <span class="count">3</span></h2>
+    <div class="grid grid-3">
+      <a class="preview-card" href="/logos/asterscan-logo-compact.svg" target="_blank">
+        <div class="visual bg-light"><img src="/logos/asterscan-logo-compact.svg" alt="" /></div>
+        <div class="meta-bar"><span class="label">Compact</span><span class="dim">SVG</span></div>
+      </a>
+      <a class="preview-card" href="/logos/asterscan-logo-white.svg" target="_blank">
+        <div class="visual"><img src="/logos/asterscan-logo-white.svg" alt="" /></div>
+        <div class="meta-bar"><span class="label">White tile</span><span class="dim">SVG</span></div>
+      </a>
+      <a class="preview-card" href="/logos/asterscan-icon-mark.svg" target="_blank">
+        <div class="visual bg-mid"><img src="/logos/asterscan-icon-mark.svg" alt="" style="max-height: 100px;" /></div>
+        <div class="meta-bar"><span class="label">Icon mark</span><span class="dim">SVG · 100×100</span></div>
+      </a>
+    </div>
+
+    <h2 id="lockup">Logo lockup <span class="count">live render</span></h2>
+    <p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+      The canonical lockup as it ships in the live navbar — JetBrains Mono, ASTER bold/primary, SCAN regular/muted at 70% opacity, tracking 0.14em.
+    </p>
+    <div class="lockup">
+      <div class="lk-mark"><img src="/logos/asterscan-icon-mark.svg" alt="" /></div>
+      <div class="wordmark-display"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
+      <span class="lk-meta">JetBrains Mono · 700 / 400</span>
+    </div>
+
+    <h2 id="palette">Brand palette <span class="count">16 colors</span></h2>
+    <div class="swatch-row" style="margin-bottom: 8px;">
+      <div class="swatch light" style="--c:#F4D5B1"><span class="sname">primary</span><span class="shex">#F4D5B1</span></div>
+      <div class="swatch light" style="--c:#FFD29F"><span class="sname">primary-hover</span><span class="shex">#FFD29F</span></div>
+      <div class="swatch light" style="--c:#FFE5C5"><span class="sname">primary-light</span><span class="shex">#FFE5C5</span></div>
+      <div class="swatch dark" style="--c:#0E0E0F; border-color:#26262A"><span class="sname">background</span><span class="shex">#0E0E0F</span></div>
+    </div>
+    <div class="swatch-row" style="margin-bottom: 8px;">
+      <div class="swatch dark" style="--c:#161618; border-color:#26262A"><span class="sname">surface</span><span class="shex">#161618</span></div>
+      <div class="swatch dark" style="--c:#1C1C1F; border-color:#26262A"><span class="sname">surface-raised</span><span class="shex">#1C1C1F</span></div>
+      <div class="swatch dark" style="--c:#252528; border-color:#26262A"><span class="sname">surface-overlay</span><span class="shex">#252528</span></div>
+      <div class="swatch dark" style="--c:#3A3A3F"><span class="sname">border-strong</span><span class="shex">#3A3A3F</span></div>
+    </div>
+    <div class="swatch-row" style="margin-bottom: 8px;">
+      <div class="swatch dark" style="--c:#161618; color:#F2F0EE; border-color:#26262A"><span class="sname">text-primary</span><span class="shex">#F2F0EE</span></div>
+      <div class="swatch dark" style="--c:#161618; color:#B9B5B0; border-color:#26262A"><span class="sname">text-secondary</span><span class="shex">#B9B5B0</span></div>
+      <div class="swatch dark" style="--c:#161618; color:#7A7770; border-color:#26262A"><span class="sname">text-muted</span><span class="shex">#7A7770</span></div>
+      <div class="swatch dark" style="--c:#26262A"><span class="sname">border</span><span class="shex">#26262A</span></div>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch dark" style="--c:#22C55E"><span class="sname">success · long</span><span class="shex">#22C55E</span></div>
+      <div class="swatch dark" style="--c:#EF4444"><span class="sname">danger · short</span><span class="shex">#EF4444</span></div>
+      <div class="swatch dark" style="--c:#F59E0B"><span class="sname">warning · cliff</span><span class="shex">#F59E0B</span></div>
+      <div class="swatch dark" style="--c:#3B82F6"><span class="sname">info</span><span class="shex">#3B82F6</span></div>
+    </div>
+    <div class="grid grid-2" style="margin-top: 14px;">
+      <a class="card" href="/palette-card.html">
+        <span class="name">Palette card →</span>
+        <span class="desc">Print-ready A4 landscape, all swatches + role descriptions.</span>
+      </a>
+      <a class="card" href="/colors.json">
+        <span class="name">colors.json →</span>
+        <span class="desc">Raw HEX + RGB per token, machine-readable for any tool.</span>
+      </a>
+    </div>
+
+    <h2 id="typography">Typography <span class="count">DM Sans + JetBrains Mono</span></h2>
+    <div class="grid grid-2">
+      <a class="card" href="/typography/typography-card.html">
+        <span class="name">Typography card →</span>
+        <span class="desc">DM Sans + JetBrains Mono specimen, every size + weight + use case.</span>
+        <span class="meta">typography-card.html</span>
+      </a>
+      <a class="card" href="/figma-tokens.json">
+        <span class="name">figma-tokens.json →</span>
+        <span class="desc">Tokens Studio for Figma — import to sync palette + typography.</span>
+        <span class="meta">figma-tokens.json</span>
+      </a>
+    </div>
+
+    <h2 id="components">UI components <span class="count">all atoms</span></h2>
+    <p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+      Buttons, badges, cards, stat numbers, table rows, status pills. One specimen page — open and screenshot any element.
+    </p>
+    <div class="grid grid-2">
+      <a class="card" href="/components.html">
+        <span class="name">UI Components Gallery →</span>
+        <span class="desc">8 component families: buttons (4 variants), badges (6 severities), cards, stat-cards, data-age pills, long/short bar, hover-state table row, logo lockups.</span>
+        <span class="meta">components.html</span>
+      </a>
+    </div>
+
+    <h2 id="frames">Video frames <span class="count">3 × 1920×1080</span></h2>
+    <p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+      Empty brand-skinned frames at 16:9 for After Effects / Premiere. Designer fills the placeholder copy with the actual content.
+    </p>
+    <div class="grid grid-3">
+      <a class="card" href="/frames/title-card-1920x1080.html">
+        <span class="name">Title card →</span>
+        <span class="desc">Opening / chapter card with brand top, headline middle, URL footer.</span>
+        <span class="meta">title-card-1920x1080.html</span>
+      </a>
+      <a class="card" href="/frames/lower-third-1920x1080.html">
+        <span class="name">Lower third →</span>
+        <span class="desc">Speaker / chapter overlay + stat callout, transparent on top of footage.</span>
+        <span class="meta">lower-third-1920x1080.html</span>
+      </a>
+      <a class="card" href="/frames/end-card-1920x1080.html">
+        <span class="name">End card →</span>
+        <span class="desc">Closing card centered around the icon mark + URL.</span>
+        <span class="meta">end-card-1920x1080.html</span>
+      </a>
+    </div>
+
+    <h2 id="social">Social templates <span class="count">5 formats</span></h2>
+    <p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+      Empty brand frames for static social posts. Designer fills the headline + sub. No marketing copy baked in.
+    </p>
+    <div class="grid grid-3">
+      <a class="card" href="/social/og-card-1200x630.html">
+        <span class="name">OG card →</span>
+        <span class="desc">Facebook / LinkedIn / Discord previews.</span>
+        <span class="meta">1200×630</span>
+      </a>
+      <a class="card" href="/social/twitter-card-1200x675.html">
+        <span class="name">Twitter / X card →</span>
+        <span class="desc">X large card preview.</span>
+        <span class="meta">1200×675</span>
+      </a>
+      <a class="card" href="/social/instagram-1080x1080.html">
+        <span class="name">Instagram square →</span>
+        <span class="desc">IG, Threads.</span>
+        <span class="meta">1080×1080</span>
+      </a>
+      <a class="card" href="/social/twitter-banner-1500x500.html">
+        <span class="name">Twitter banner →</span>
+        <span class="desc">Profile banner with avatar safe-zone marked.</span>
+        <span class="meta">1500×500</span>
+      </a>
+      <a class="card" href="/social/github-social-1280x640.html">
+        <span class="name">GitHub social →</span>
+        <span class="desc">Repo social preview, OSS badge style.</span>
+        <span class="meta">1280×640</span>
+      </a>
+    </div>
+
+    <h2 id="alpha">Alpha banners <span class="count">6 × 1200×630</span></h2>
+    <p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+      Pre-baked teaser banners for the 5 AsterScan Alpha tools (Smart Money Mirror, Private Mirror, Validator X-ray,
+      Iceberg Hunter, Liquidation Forecaster) plus a combined suite overview. Drop directly into a video, post, or pitch deck.
+    </p>
+    <div class="grid grid-3">
+      <a class="card" href="/alpha/alpha-suite-overview.html">
+        <span class="badge">Overview</span>
+        <span class="name">Alpha Suite — Overview →</span>
+        <span class="desc">All 5 alpha tools in one composite banner. Best for the lead frame.</span>
+        <span class="meta">alpha-suite-overview.html · 1200×630</span>
+      </a>
+      <a class="card" href="/alpha/alpha-smart-money-mirror.html">
+        <span class="badge">🪞 Mirror</span>
+        <span class="name">Smart Money Mirror →</span>
+        <span class="desc">Auto-copy the trades of verified profitable wallets. Standalone teaser.</span>
+        <span class="meta">alpha-smart-money-mirror.html · 1200×630</span>
+      </a>
+      <a class="card" href="/alpha/alpha-private-mirror.html">
+        <span class="badge">🔒 Private</span>
+        <span class="name">Private Mirror →</span>
+        <span class="desc">Mirror smart money under Aster Chain privacy mode. Standalone teaser.</span>
+        <span class="meta">alpha-private-mirror.html · 1200×630</span>
+      </a>
+      <a class="card" href="/alpha/alpha-validator-xray.html">
+        <span class="badge">🔬 X-ray</span>
+        <span class="name">Validator X-ray →</span>
+        <span class="desc">Per-validator oracle skew, censorship, uptime, fee burn. Standalone teaser.</span>
+        <span class="meta">alpha-validator-xray.html · 1200×630</span>
+      </a>
+      <a class="card" href="/alpha/alpha-iceberg-hunter.html">
+        <span class="badge">🧊 Iceberg</span>
+        <span class="name">Iceberg Hunter →</span>
+        <span class="desc">Detect hidden liquidity walls before they print. Standalone teaser.</span>
+        <span class="meta">alpha-iceberg-hunter.html · 1200×630</span>
+      </a>
+      <a class="card" href="/alpha/alpha-liquidation-forecaster.html">
+        <span class="badge">🌪️ Forecaster</span>
+        <span class="name">Liquidation Forecaster →</span>
+        <span class="desc">Forward-cascade ladder + USD-at-risk by price level. Standalone teaser.</span>
+        <span class="meta">alpha-liquidation-forecaster.html · 1200×630</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      <span>© Kairos Lab · AsterScan UI Partner Kit · 2026-05-07</span>
+      <a href="https://aster-scan.com">aster-scan.com</a>
+    </div>
+
+  </main>
+
 </div>
 
 </body>

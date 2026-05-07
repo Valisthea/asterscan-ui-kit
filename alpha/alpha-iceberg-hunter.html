@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan Alpha &mdash; Iceberg Hunter</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .banner {
+      width: 1200px; height: 630px;
+      background:
+        radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
+        linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
+      color: #F2F0EE;
+      padding: 70px 80px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+      border-radius: 16px;
+    }
+    .banner::after {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 360px; height: 5px;
+      background: linear-gradient(90deg, transparent, #F4D5B1);
+    }
+    .head { display: flex; justify-content: space-between; align-items: flex-start; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .icon-mark {
+      width: 50px; height: 50px;
+      background: linear-gradient(135deg, #F4D5B1, #FFD29F);
+      border-radius: 12px;
+      display: grid; place-items: center;
+      color: #0E0E0F; font-weight: 800; font-size: 26px;
+    }
+    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; font-size: 24px; }
+    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
+    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+    .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+    .alpha-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 9999px;
+      background: rgba(244, 213, 177, 0.15);
+      color: #F4D5B1;
+      border: 1px solid rgba(244, 213, 177, 0.30);
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+    }
+
+    .body { display: flex; flex-direction: column; gap: 16px; }
+    .body .emoji { font-size: 48px; line-height: 1; }
+    .body .name { font-size: 64px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; }
+    .body .name .accent {
+      background: linear-gradient(120deg, #F4D5B1, #F7E3CC);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .body .tag { font-size: 22px; color: #B9B5B0; line-height: 1.4; max-width: 820px; }
+    .body .blurb { font-size: 15px; color: #7A7770; line-height: 1.55; max-width: 820px; padding-top: 4px; }
+
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #F2F0EE; opacity: 0.85; }
+    .by  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="head">
+    <div class="brand">
+      <div class="icon-mark">&#10033;</div>
+      <div>
+        <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
+        <div class="meta">Alpha suite</div>
+      </div>
+    </div>
+    <div class="alpha-tag">Alpha &middot; iceberg hunter</div>
+  </div>
+
+  <div class="body">
+    <div class="emoji">&#x1F9CA;</div>
+    <div class="name">Iceberg Hunter</div>
+    <div class="tag">Heuristic detection of split orders.</div>
+    <div class="blurb">Children + window + size cluster heuristic. Catches whales splitting big orders into stealth chunks across short windows.</div>
+  </div>
+
+  <div class="footer">
+    <div class="url">aster-scan.com/alpha/iceberg-hunter</div>
+    <div class="by">Beta &middot; signal-grade analytics, not financial advice</div>
+  </div>
+</div>
+
+</body>
+</html>
