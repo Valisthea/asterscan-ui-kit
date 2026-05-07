@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>AsterScan Alpha — Validator X-Ray</title>
+  <title>AsterScan Alpha — Insight Engine</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -101,26 +101,27 @@ body {
       <div class="mark">✱</div>
       <div>
         <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
-        <div class="meta">Alpha · Validator forensics</div>
+        <div class="meta">Alpha · Plain-language feed</div>
       </div>
     </div>
     <div class="version-pill">v 0.5</div>
   </div>
 
   <div class="visual-card">
-    <svg viewBox="0 0 200 80" preserveAspectRatio="none"
-         style="position:absolute;inset:0;width:100%;height:100%">
-      <line x1="10" x2="190" y1="45" y2="45" stroke="rgb(250 204 21 / 0.15)" stroke-width="0.4"/>
-      <g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 0.0s">  <circle cx="25" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="25" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="23.5" y="20" width="3" height="20" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 0.4s">  <circle cx="55" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="55" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="53.5" y="23" width="3" height="17" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 0.8s">  <circle cx="85" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="85" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="83.5" y="26" width="3" height="14" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 1.2000000000000002s">  <circle cx="115" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="115" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="113.5" y="22" width="3" height="18" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 1.6s">  <circle cx="145" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="145" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="143.5" y="25" width="3" height="15" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 2.0s">  <circle cx="175" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="175" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="173.5" y="21" width="3" height="19" fill="rgb(250 204 21 / 0.4)"/></g>
-      <line x1="0" x2="0" y1="5" y2="75" stroke="rgb(250 204 21 / 0.5)" stroke-width="1"
-            style="animation: alpha-sweep 3s ease-in-out infinite alternate; transform-origin: 0 0"/>
-    </svg>
+    <style>
+      .ilines { position: absolute; inset: 0; display: flex; flex-direction: column;
+        justify-content: center; padding: 0 36px; font-family: 'JetBrains Mono', monospace;
+        font-size: 22px; color: rgba(250, 204, 21, 0.75); line-height: 1.7;
+        font-weight: 500; }
+      .iline { opacity: 0; }
+    </style>
+    <div class="ilines"><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 0.0s">→ 0xa1b2 placed BUY $312k BTCUSDT</div><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 1.6s">▲ Validator-2 oracle delta +18 bps</div><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 3.2s">◆ Privacy share rose to 47% (24h)</div><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 4.800000000000001s">→ Whale cluster #7 reactivated</div></div>
     </div>
 
   <div class="title-row">
     <div class="lhs">
-      <h1>Validator <span class="accent">X-Ray</span></h1>
-      <div class="tag">Per-validator forensics ahead of external set opening.</div>
+      <h1>Insight <span class="accent">Engine</span></h1>
+      <div class="tag">Aster Chain narrated in plain English.</div>
     </div>
     <div class="url">aster-scan.com/alpha</div>
   </div>

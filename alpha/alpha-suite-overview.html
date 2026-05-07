@@ -2,99 +2,288 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>AsterScan Alpha &mdash; Suite Overview</title>
+  <title>AsterScan Alpha — Suite Overview</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
-    .banner {
-      width: 1200px; height: 630px;
-      background:
-        radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
-        linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
-      color: #F2F0EE;
-      padding: 60px 70px 50px;
-      display: flex; flex-direction: column; gap: 28px;
-      position: relative; overflow: hidden;
-      border-radius: 16px;
-    }
-    .banner::after { content: ''; position: absolute; top: 0; right: 0; width: 360px; height: 5px; background: linear-gradient(90deg, transparent, #F4D5B1); }
-    .head { display: flex; justify-content: space-between; align-items: flex-start; }
-    .brand { display: flex; align-items: center; gap: 14px; }
-    .icon-mark { width: 50px; height: 50px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); border-radius: 12px; display: grid; place-items: center; color: #0E0E0F; font-weight: 800; font-size: 26px; }
-    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; font-size: 24px; }
-    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
-    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
-    .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
-    .alpha-tag { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 9999px; background: rgba(244, 213, 177, 0.15); color: #F4D5B1; border: 1px solid rgba(244, 213, 177, 0.30); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #2a2a2c; padding: 24px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+.banner {
+  width: 1200px; height: 630px;
+  background:
+    radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
+    linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
+  color: #F2F0EE;
+  padding: 60px 70px;
+  display: grid; grid-template-rows: auto 1fr auto;
+  gap: 32px;
+  position: relative; overflow: hidden;
+  border-radius: 18px;
+}
+.banner::after {
+  content: ''; position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, transparent, #F4D5B1, #FFD29F, transparent);
+}
 
-    .title-block .name { font-size: 48px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; }
-    .title-block .name .accent { background: linear-gradient(120deg, #F4D5B1, #FFD29F); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .title-block .tag { font-size: 18px; color: #B9B5B0; margin-top: 6px; }
+/* Top row — brand + version */
+.head { display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand .mark { width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, #F4D5B1, #FFD29F);
+  display: grid; place-items: center; color: #0E0E0F;
+  font-weight: 800; font-size: 24px; }
+.brand .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;
+  display: inline-flex; align-items: baseline; gap: 1px; font-size: 16px; }
+.brand .wordmark .aster { font-weight: 700; color: #F4D5B1; }
+.brand .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+.brand .meta { font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #7A7770; letter-spacing: 0.18em;
+  text-transform: uppercase; margin-top: 4px; }
 
-    .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-    .tool { background: rgba(22, 22, 24, 0.6); border: 1px solid #26262A; border-radius: 12px; padding: 16px 14px; display: flex; flex-direction: column; gap: 6px; }
-    .tool .tool-emoji { font-size: 24px; line-height: 1; }
-    .tool .tool-name { font-size: 13px; font-weight: 700; line-height: 1.2; }
-    .tool .tool-blurb { font-size: 11px; color: #7A7770; line-height: 1.4; }
+.version-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 6px;
+  background: rgba(244, 213, 177, 0.15);
+  color: #F4D5B1;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid rgba(244, 213, 177, 0.25);
+}
 
-    .footer { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 4px; }
-    .url { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #F2F0EE; opacity: 0.85; }
-    .by  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; }
-  </style>
+/* Animated visual card — mimics .alpha-visual on the live site */
+.visual-card {
+  position: relative;
+  width: 100%; height: 280px;
+  border-radius: 12px;
+  border: 1px solid rgba(250, 204, 21, 0.40);
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%, rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* Title row */
+.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.title-row .lhs { max-width: 720px; }
+.title-row h1 {
+  font-size: 56px; font-weight: 800; letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+.title-row h1 .accent { color: #F4D5B1; }
+.title-row .tag {
+  font-family: 'JetBrains Mono', monospace; font-style: italic;
+  font-size: 18px; color: #B9B5B0; line-height: 1.5;
+  margin-top: 16px;
+}
+.title-row .url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px; color: #7A7770;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  text-align: right; flex-shrink: 0;
+}
+
+/* ── Animation keyframes ── */
+@keyframes alpha-scroll-y { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
+@keyframes alpha-sweep    { 0% { transform: translateX(-10%); } 100% { transform: translateX(110%); } }
+@keyframes alpha-bob      { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes alpha-pulse    { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes alpha-drop     { 0% { transform: scaleY(0.05); transform-origin: top; opacity: 0; } 10% { opacity: 1; } 100% { transform: scaleY(1); transform-origin: top; opacity: 1; } }
+@keyframes alpha-fade-up  { 0% { opacity: 0; transform: translateY(4px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-4px); } }
+@keyframes alpha-trail    { 0% { transform: translateX(0); } 100% { transform: translateX(82%); } }
+
+.banner {
+  display: flex; flex-direction: column; gap: 28px;
+  padding: 50px 60px;
+}
+.title-row h1 { font-size: 48px; }
+.tiles {
+  flex: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 14px;
+}
+.tile {
+  background: rgba(22, 22, 24, 0.7);
+  border: 1px solid #26262A;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.tile-visual {
+  position: relative; flex: 1; min-height: 90px;
+  border-bottom: 1px solid rgba(250, 204, 21, 0.30);
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%, rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
+}
+.tile-meta { padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tile-title { font-size: 13px; font-weight: 600; color: #F2F0EE; }
+.tile-ver { font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  color: #F4D5B1; background: rgba(244, 213, 177, 0.12);
+  padding: 2px 6px; border-radius: 3px; letter-spacing: 0.1em; text-transform: uppercase; }
+</style>
 </head>
 <body>
-
 <div class="banner">
   <div class="head">
     <div class="brand">
-      <div class="icon-mark">&#10033;</div>
+      <div class="mark">✱</div>
       <div>
         <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
-        <div class="meta">Alpha suite</div>
+        <div class="meta">Alpha suite · 7 experimental tools</div>
       </div>
     </div>
-    <div class="alpha-tag">5 tools &middot; live</div>
+    <div class="version-pill">v 2026-05-07</div>
   </div>
 
-  <div class="title-block">
-    <div class="name">The Alpha <span class="accent">suite.</span></div>
-    <div class="tag">Five tools that read what the chain doesn&apos;t say out loud.</div>
-  </div>
-
-  <div class="grid">
-    <div class="tool">
-      <div class="tool-emoji">&#x1FA9E;</div>
-      <div class="tool-name">Smart Money Mirror</div>
-      <div class="tool-blurb">Wallets that move before the move.</div>
+  <div class="title-row">
+    <div class="lhs">
+      <h1>The <span class="accent">Alpha</span> suite.</h1>
+      <div class="tag">Seven experimental tools — privacy mirror, replay, narration, copy-trading, validator forensics, cascade forecasting, hidden-liquidity detection.</div>
     </div>
-    <div class="tool">
-      <div class="tool-emoji">&#x1F512;</div>
-      <div class="tool-name">Private Mirror</div>
-      <div class="tool-blurb">Privacy adoption + cipher heatmap.</div>
-    </div>
-    <div class="tool">
-      <div class="tool-emoji">&#x1F52C;</div>
-      <div class="tool-name">Validator X-Ray</div>
-      <div class="tool-blurb">Concentration + oracle deviation.</div>
-    </div>
-    <div class="tool">
-      <div class="tool-emoji">&#x1F9CA;</div>
-      <div class="tool-name">Iceberg Hunter</div>
-      <div class="tool-blurb">Split-order heuristic detection.</div>
-    </div>
-    <div class="tool">
-      <div class="tool-emoji">&#x1F32A;&#xFE0F;</div>
-      <div class="tool-name">Liquidation Forecaster</div>
-      <div class="tool-blurb">Forward cascade simulation.</div>
-    </div>
-  </div>
-
-  <div class="footer">
     <div class="url">aster-scan.com/alpha</div>
-    <div class="by">Beta &middot; signal-grade analytics</div>
   </div>
-</div>
 
+  <div class="tiles">
+        <div class="tile">
+          <div class="tile-visual">
+    <style>
+      .pgrid { position: absolute; inset: 0; display: flex; justify-content: space-around;
+        align-items: stretch; padding: 0 30px; font-family: 'JetBrains Mono', monospace;
+        font-size: 24px; color: rgba(250, 204, 21, 0.55); user-select: none; }
+      .pcol { display: flex; flex-direction: column; align-items: center; line-height: 1.15; }
+      .pcol span { display: block; }
+      .pfade { position: absolute; inset: 0; pointer-events: none;
+        background: linear-gradient(to bottom, transparent, transparent, rgba(14, 14, 15, 0.85)); }
+    </style>
+    <div class="pgrid"><div class="pcol" style="animation: alpha-scroll-y 2.5s linear infinite; animation-delay: 0.00s"><span style="opacity:0.30">1f</span><span style="opacity:0.44">9c</span><span style="opacity:0.58">0a</span><span style="opacity:0.72">e3</span><span style="opacity:0.86">5b</span><span style="opacity:0.30">47</span><span style="opacity:0.44">8d</span><span style="opacity:0.58">22</span><span style="opacity:0.72">c0</span><span style="opacity:0.86">1f</span><span style="opacity:0.30">9c</span><span style="opacity:0.44">0a</span><span style="opacity:0.58">e3</span><span style="opacity:0.72">5b</span><span style="opacity:0.86">47</span><span style="opacity:0.30">8d</span><span style="opacity:0.44">22</span><span style="opacity:0.58">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 2.9s linear infinite; animation-delay: 0.15s"><span style="opacity:0.44">1f</span><span style="opacity:0.58">9c</span><span style="opacity:0.72">0a</span><span style="opacity:0.86">e3</span><span style="opacity:0.30">5b</span><span style="opacity:0.44">47</span><span style="opacity:0.58">8d</span><span style="opacity:0.72">22</span><span style="opacity:0.86">c0</span><span style="opacity:0.30">1f</span><span style="opacity:0.44">9c</span><span style="opacity:0.58">0a</span><span style="opacity:0.72">e3</span><span style="opacity:0.86">5b</span><span style="opacity:0.30">47</span><span style="opacity:0.44">8d</span><span style="opacity:0.58">22</span><span style="opacity:0.72">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 3.3s linear infinite; animation-delay: 0.30s"><span style="opacity:0.58">1f</span><span style="opacity:0.72">9c</span><span style="opacity:0.86">0a</span><span style="opacity:0.30">e3</span><span style="opacity:0.44">5b</span><span style="opacity:0.58">47</span><span style="opacity:0.72">8d</span><span style="opacity:0.86">22</span><span style="opacity:0.30">c0</span><span style="opacity:0.44">1f</span><span style="opacity:0.58">9c</span><span style="opacity:0.72">0a</span><span style="opacity:0.86">e3</span><span style="opacity:0.30">5b</span><span style="opacity:0.44">47</span><span style="opacity:0.58">8d</span><span style="opacity:0.72">22</span><span style="opacity:0.86">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 3.7s linear infinite; animation-delay: 0.45s"><span style="opacity:0.72">1f</span><span style="opacity:0.86">9c</span><span style="opacity:0.30">0a</span><span style="opacity:0.44">e3</span><span style="opacity:0.58">5b</span><span style="opacity:0.72">47</span><span style="opacity:0.86">8d</span><span style="opacity:0.30">22</span><span style="opacity:0.44">c0</span><span style="opacity:0.58">1f</span><span style="opacity:0.72">9c</span><span style="opacity:0.86">0a</span><span style="opacity:0.30">e3</span><span style="opacity:0.44">5b</span><span style="opacity:0.58">47</span><span style="opacity:0.72">8d</span><span style="opacity:0.86">22</span><span style="opacity:0.30">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 4.1s linear infinite; animation-delay: 0.60s"><span style="opacity:0.86">1f</span><span style="opacity:0.30">9c</span><span style="opacity:0.44">0a</span><span style="opacity:0.58">e3</span><span style="opacity:0.72">5b</span><span style="opacity:0.86">47</span><span style="opacity:0.30">8d</span><span style="opacity:0.44">22</span><span style="opacity:0.58">c0</span><span style="opacity:0.72">1f</span><span style="opacity:0.86">9c</span><span style="opacity:0.30">0a</span><span style="opacity:0.44">e3</span><span style="opacity:0.58">5b</span><span style="opacity:0.72">47</span><span style="opacity:0.86">8d</span><span style="opacity:0.30">22</span><span style="opacity:0.44">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 4.5s linear infinite; animation-delay: 0.75s"><span style="opacity:0.30">1f</span><span style="opacity:0.44">9c</span><span style="opacity:0.58">0a</span><span style="opacity:0.72">e3</span><span style="opacity:0.86">5b</span><span style="opacity:0.30">47</span><span style="opacity:0.44">8d</span><span style="opacity:0.58">22</span><span style="opacity:0.72">c0</span><span style="opacity:0.86">1f</span><span style="opacity:0.30">9c</span><span style="opacity:0.44">0a</span><span style="opacity:0.58">e3</span><span style="opacity:0.72">5b</span><span style="opacity:0.86">47</span><span style="opacity:0.30">8d</span><span style="opacity:0.44">22</span><span style="opacity:0.58">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 4.9s linear infinite; animation-delay: 0.90s"><span style="opacity:0.44">1f</span><span style="opacity:0.58">9c</span><span style="opacity:0.72">0a</span><span style="opacity:0.86">e3</span><span style="opacity:0.30">5b</span><span style="opacity:0.44">47</span><span style="opacity:0.58">8d</span><span style="opacity:0.72">22</span><span style="opacity:0.86">c0</span><span style="opacity:0.30">1f</span><span style="opacity:0.44">9c</span><span style="opacity:0.58">0a</span><span style="opacity:0.72">e3</span><span style="opacity:0.86">5b</span><span style="opacity:0.30">47</span><span style="opacity:0.44">8d</span><span style="opacity:0.58">22</span><span style="opacity:0.72">c0</span></div><div class="pcol" style="animation: alpha-scroll-y 5.3s linear infinite; animation-delay: 1.05s"><span style="opacity:0.58">1f</span><span style="opacity:0.72">9c</span><span style="opacity:0.86">0a</span><span style="opacity:0.30">e3</span><span style="opacity:0.44">5b</span><span style="opacity:0.58">47</span><span style="opacity:0.72">8d</span><span style="opacity:0.86">22</span><span style="opacity:0.30">c0</span><span style="opacity:0.44">1f</span><span style="opacity:0.58">9c</span><span style="opacity:0.72">0a</span><span style="opacity:0.86">e3</span><span style="opacity:0.30">5b</span><span style="opacity:0.44">47</span><span style="opacity:0.58">8d</span><span style="opacity:0.72">22</span><span style="opacity:0.86">c0</span></div></div>
+    <div class="pfade"></div>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Private Mirror</div>
+            <div class="tile-ver">v 1.0</div>
+          </div>
+        </div>
+        
+        <div class="tile">
+          <div class="tile-visual">
+    <svg viewBox="0 0 200 80" preserveAspectRatio="none"
+         style="position:absolute;inset:0;width:100%;height:100%">
+      <line x1="10" x2="10" y1="30" y2="50" stroke="rgb(250 204 21 / 0.4)" stroke-width="1"/><line x1="19" x2="19" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="28" x2="28" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="37" x2="37" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="46" x2="46" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="55" x2="55" y1="30" y2="50" stroke="rgb(250 204 21 / 0.4)" stroke-width="1"/><line x1="64" x2="64" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="73" x2="73" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="82" x2="82" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="91" x2="91" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="100" x2="100" y1="30" y2="50" stroke="rgb(250 204 21 / 0.4)" stroke-width="1"/><line x1="109" x2="109" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="118" x2="118" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="127" x2="127" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="136" x2="136" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="145" x2="145" y1="30" y2="50" stroke="rgb(250 204 21 / 0.4)" stroke-width="1"/><line x1="154" x2="154" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="163" x2="163" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="172" x2="172" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="181" x2="181" y1="38" y2="45" stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/><line x1="190" x2="190" y1="30" y2="50" stroke="rgb(250 204 21 / 0.4)" stroke-width="1"/>
+      <line x1="5" x2="195" y1="42" y2="42" stroke="rgb(250 204 21 / 0.3)" stroke-width="0.6"/>
+      <text x="12" y="22" fill="rgb(250 204 21 / 0.55)" font-size="7" font-family="monospace">99,829k</text>
+      <text x="150" y="22" fill="rgb(250 204 21 / 0.55)" font-size="7" font-family="monospace">99,830k</text>
+      <g style="animation: alpha-sweep 4s ease-in-out infinite alternate; transform-origin: 0 0">
+        <line x1="5" x2="5" y1="28" y2="56" stroke="rgb(250 204 21)" stroke-width="1.2"/>
+        <circle cx="5" cy="42" r="2.5" fill="rgb(250 204 21)"/>
+        <circle cx="5" cy="42" r="5" fill="rgb(250 204 21 / 0.25)"/>
+      </g>
+    </svg>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Time Machine</div>
+            <div class="tile-ver">v 0.5</div>
+          </div>
+        </div>
+        
+        <div class="tile">
+          <div class="tile-visual">
+    <style>
+      .ilines { position: absolute; inset: 0; display: flex; flex-direction: column;
+        justify-content: center; padding: 0 36px; font-family: 'JetBrains Mono', monospace;
+        font-size: 22px; color: rgba(250, 204, 21, 0.75); line-height: 1.7;
+        font-weight: 500; }
+      .iline { opacity: 0; }
+    </style>
+    <div class="ilines"><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 0.0s">→ 0xa1b2 placed BUY $312k BTCUSDT</div><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 1.6s">▲ Validator-2 oracle delta +18 bps</div><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 3.2s">◆ Privacy share rose to 47% (24h)</div><div class="iline" style="animation: alpha-fade-up 6.4s ease-in-out infinite; animation-delay: 4.800000000000001s">→ Whale cluster #7 reactivated</div></div>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Insight Engine</div>
+            <div class="tile-ver">v 0.5</div>
+          </div>
+        </div>
+        
+        <div class="tile">
+          <div class="tile-visual">
+    <svg viewBox="0 0 200 80" preserveAspectRatio="none"
+         style="position:absolute;inset:0;width:100%;height:100%">
+      <line x1="20" x2="180" y1="55" y2="55" stroke="rgb(250 204 21 / 0.2)"
+            stroke-width="0.5" stroke-dasharray="2 3"/>
+      <line x1="20" x2="180" y1="28" y2="28" stroke="rgb(250 204 21 / 0.2)"
+            stroke-width="0.5" stroke-dasharray="2 3"/>
+      <text x="5" y="32" fill="rgb(250 204 21 / 0.55)" font-size="7" font-family="monospace">smart</text>
+      <text x="5" y="59" fill="rgb(250 204 21 / 0.5)"  font-size="7" font-family="monospace">copy</text>
+      <g style="animation: alpha-trail 3.5s ease-in-out infinite alternate">
+        <circle cx="20" cy="28" r="3" fill="rgb(34 197 94)"/>
+        <circle cx="20" cy="28" r="7" fill="rgb(34 197 94 / 0.25)"/>
+      </g>
+      <g style="animation: alpha-trail 3.5s ease-in-out infinite alternate; animation-delay: 0.6s">
+        <circle cx="20" cy="55" r="2.5" fill="rgb(250 204 21)"/>
+        <circle cx="20" cy="55" r="5" fill="rgb(250 204 21 / 0.2)"/>
+      </g>
+    </svg>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Smart Money Mirror</div>
+            <div class="tile-ver">v 0.5</div>
+          </div>
+        </div>
+        
+        <div class="tile">
+          <div class="tile-visual">
+    <svg viewBox="0 0 200 80" preserveAspectRatio="none"
+         style="position:absolute;inset:0;width:100%;height:100%">
+      <line x1="10" x2="190" y1="45" y2="45" stroke="rgb(250 204 21 / 0.15)" stroke-width="0.4"/>
+      <g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 0.0s">  <circle cx="25" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="25" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="23.5" y="20" width="3" height="20" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 0.4s">  <circle cx="55" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="55" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="53.5" y="23" width="3" height="17" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 0.8s">  <circle cx="85" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="85" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="83.5" y="26" width="3" height="14" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 1.2000000000000002s">  <circle cx="115" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="115" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="113.5" y="22" width="3" height="18" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 1.6s">  <circle cx="145" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="145" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="143.5" y="25" width="3" height="15" fill="rgb(250 204 21 / 0.4)"/></g><g style="animation: alpha-pulse 2.4s ease-in-out infinite; animation-delay: 2.0s">  <circle cx="175" cy="45" r="3" fill="rgb(250 204 21 / 0.7)"/>  <circle cx="175" cy="45" r="6" fill="rgb(250 204 21 / 0.15)"/>  <rect x="173.5" y="21" width="3" height="19" fill="rgb(250 204 21 / 0.4)"/></g>
+      <line x1="0" x2="0" y1="5" y2="75" stroke="rgb(250 204 21 / 0.5)" stroke-width="1"
+            style="animation: alpha-sweep 3s ease-in-out infinite alternate; transform-origin: 0 0"/>
+    </svg>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Validator X-Ray</div>
+            <div class="tile-ver">v 0.5</div>
+          </div>
+        </div>
+        
+        <div class="tile">
+          <div class="tile-visual">
+    <style>
+      .cwrap { position: absolute; inset: 0; display: flex; align-items: flex-end;
+        justify-content: space-around; padding: 0 24px 12px; }
+      .cwrap .bar { width: 18px; border-radius: 3px 3px 0 0;
+        background: linear-gradient(to top, rgba(239, 68, 68, 0.7) 0%,
+          rgba(239, 68, 68, 0.5) 50%, rgba(250, 204, 21, 0.4) 100%); }
+    </style>
+    <div class="cwrap"><div class="bar" style="height:60%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 0.0s"></div><div class="bar" style="height:75%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 0.18s"></div><div class="bar" style="height:50%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 0.36s"></div><div class="bar" style="height:85%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 0.54s"></div><div class="bar" style="height:65%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 0.72s"></div><div class="bar" style="height:90%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 0.8999999999999999s"></div><div class="bar" style="height:55%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 1.08s"></div><div class="bar" style="height:70%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 1.26s"></div><div class="bar" style="height:80%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 1.44s"></div><div class="bar" style="height:62%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 1.6199999999999999s"></div><div class="bar" style="height:78%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 1.7999999999999998s"></div><div class="bar" style="height:58%;animation: alpha-drop 2.6s ease-out infinite; animation-delay: 1.98s"></div></div>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Liquidation Forecaster</div>
+            <div class="tile-ver">v 0.5</div>
+          </div>
+        </div>
+        
+        <div class="tile">
+          <div class="tile-visual">
+    <svg viewBox="0 0 200 80" preserveAspectRatio="none"
+         style="position:absolute;inset:0;width:100%;height:100%">
+      <line x1="0" x2="200" y1="35" y2="35" stroke="rgb(56 189 248 / 0.5)"
+            stroke-width="0.8" stroke-dasharray="3 2"/>
+      <text x="5" y="32" fill="rgb(56 189 248 / 0.7)" font-size="6" font-family="monospace">visible</text>
+      <text x="5" y="48" fill="rgb(250 204 21 / 0.6)" font-size="6" font-family="monospace">hidden</text>
+      <g style="animation: alpha-bob 4s ease-in-out infinite">
+        <polygon points="100,15 90,35 110,35" fill="rgb(250 204 21 / 0.85)"
+                 stroke="rgb(250 204 21)" stroke-width="0.5"/>
+        <polygon points="80,35 100,75 120,35 115,55 85,55" fill="rgb(250 204 21 / 0.25)"
+                 stroke="rgb(250 204 21 / 0.4)" stroke-width="0.5"/>
+      </g>
+    </svg>
+    </div>
+          <div class="tile-meta">
+            <div class="tile-title">Iceberg Hunter</div>
+            <div class="tile-ver">v 0.5</div>
+          </div>
+        </div>
+        </div>
+</div>
 </body>
 </html>

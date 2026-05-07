@@ -265,12 +265,32 @@
     <!-- ── LOGO ─────────────────────────────────────── -->
     <h2 id="logos">Marks <span class="src">/logos/*.svg</span></h2>
     <div class="grid grid-3">
+      <!--
+        Previews render the lockup with HTML+CSS so the JetBrains Mono webfont
+        loaded by this page is used. The downloaded SVG embeds the same font
+        via @import — but local apps without the font installed will fall back.
+      -->
       <a class="preview-card" href="/logos/asterscan-logo-compact.svg" target="_blank">
-        <div class="visual bg-light"><img src="/logos/asterscan-logo-compact.svg" alt="" /></div>
+        <div class="visual bg-light" style="background:#FFFFFF; padding:0;">
+          <div style="display:flex; align-items:center; gap:14px; padding:0 30px;">
+            <img src="/logos/asterscan-icon-mark.svg" alt="" style="width:56px; height:56px;" />
+            <span class="wordmark" style="font-size:22px; font-family:'JetBrains Mono',monospace; letter-spacing:0.14em; display:inline-flex; align-items:baseline; gap:1px;">
+              <span style="font-weight:700; color:#e6bc8b;">ASTER</span><span style="font-weight:400; color:#a08560; opacity:0.8;">SCAN</span>
+            </span>
+          </div>
+        </div>
         <div class="meta-bar"><span class="label">Compact</span><span class="dim">asterscan-logo-compact.svg</span></div>
       </a>
       <a class="preview-card" href="/logos/asterscan-logo-white.svg" target="_blank">
-        <div class="visual"><img src="/logos/asterscan-logo-white.svg" alt="" /></div>
+        <div class="visual" style="background:#0E0E0F; padding:0;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <img src="/logos/asterscan-icon-mark.svg" alt="" style="width:80px; height:80px;" />
+            <div style="text-align:center; line-height:1.05;">
+              <div style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:28px; letter-spacing:0.18em; color:#FFFFFF;">ASTER</div>
+              <div style="font-family:'JetBrains Mono',monospace; font-weight:400; font-size:28px; letter-spacing:0.18em; color:#FFFFFF; opacity:0.6;">SCAN</div>
+            </div>
+          </div>
+        </div>
         <div class="meta-bar"><span class="label">White tile</span><span class="dim">asterscan-logo-white.svg</span></div>
       </a>
       <a class="preview-card" href="/logos/asterscan-icon-mark.svg" target="_blank">
@@ -412,37 +432,43 @@
     </div>
 
     <!-- ── ALPHA ─────────────────────────────────────── -->
-    <h2 id="alpha">Alpha banners <span class="src">/alpha/*.html · 1200×630</span></h2>
+    <h2 id="alpha">Alpha banners <span class="src">/alpha/*.html · 1200×630 · animated</span></h2>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7A7770; margin-top:4px;">
+      One animated banner per alpha tool, reproducing the live <code>AlphaCardVisual</code> animation
+      (privacy / time / insight / mirror / xray / cascade / iceberg). Source · <code>src/components/alpha/AlphaCardVisual.tsx</code>
+    </p>
     <div class="grid grid-3">
-      <a class="card" href="/alpha/alpha-suite-overview.html">
-        <span class="badge">Overview</span>
-        <span class="name">Alpha Suite — Overview</span>
-        <span class="src">alpha-suite-overview.html</span>
+      <a class="preview-card" href="/alpha/alpha-suite-overview.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-suite-overview.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Suite — Overview</span><span class="dim">v 2026-05-07</span></div>
       </a>
-      <a class="card" href="/alpha/alpha-smart-money-mirror.html">
-        <span class="badge">🪞 Mirror</span>
-        <span class="name">Smart Money Mirror</span>
-        <span class="src">alpha-smart-money-mirror.html</span>
+      <a class="preview-card" href="/alpha/alpha-private-mirror.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-private-mirror.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Private Mirror</span><span class="dim">v 1.0 · privacy</span></div>
       </a>
-      <a class="card" href="/alpha/alpha-private-mirror.html">
-        <span class="badge">🔒 Private</span>
-        <span class="name">Private Mirror</span>
-        <span class="src">alpha-private-mirror.html</span>
+      <a class="preview-card" href="/alpha/alpha-time-machine.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-time-machine.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Time Machine</span><span class="dim">v 0.5 · time</span></div>
       </a>
-      <a class="card" href="/alpha/alpha-validator-xray.html">
-        <span class="badge">🔬 X-ray</span>
-        <span class="name">Validator X-ray</span>
-        <span class="src">alpha-validator-xray.html</span>
+      <a class="preview-card" href="/alpha/alpha-insight-engine.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-insight-engine.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Insight Engine</span><span class="dim">v 0.5 · insight</span></div>
       </a>
-      <a class="card" href="/alpha/alpha-iceberg-hunter.html">
-        <span class="badge">🧊 Iceberg</span>
-        <span class="name">Iceberg Hunter</span>
-        <span class="src">alpha-iceberg-hunter.html</span>
+      <a class="preview-card" href="/alpha/alpha-smart-money-mirror.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-smart-money-mirror.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Smart Money Mirror</span><span class="dim">v 0.5 · mirror</span></div>
       </a>
-      <a class="card" href="/alpha/alpha-liquidation-forecaster.html">
-        <span class="badge">🌪️ Forecaster</span>
-        <span class="name">Liquidation Forecaster</span>
-        <span class="src">alpha-liquidation-forecaster.html</span>
+      <a class="preview-card" href="/alpha/alpha-validator-xray.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-validator-xray.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Validator X-Ray</span><span class="dim">v 0.5 · xray</span></div>
+      </a>
+      <a class="preview-card" href="/alpha/alpha-liquidation-forecaster.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-liquidation-forecaster.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Liquidation Forecaster</span><span class="dim">v 0.5 · cascade</span></div>
+      </a>
+      <a class="preview-card" href="/alpha/alpha-iceberg-hunter.html">
+        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-iceberg-hunter.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
+        <div class="meta-bar"><span class="label">Iceberg Hunter</span><span class="dim">v 0.5 · iceberg</span></div>
       </a>
     </div>
 
