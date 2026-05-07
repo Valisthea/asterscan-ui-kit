@@ -46,6 +46,13 @@
     .footer { display: flex; justify-content: space-between; align-items: flex-end; }
     .url { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #F2F0EE; opacity: 0.85; }
     .by  { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #7A7770; letter-spacing: 0.2em; text-transform: uppercase; }
+  
+    /* Brand wordmark — matches the live navbar: JetBrains Mono with
+       ASTER bold/primary + SCAN regular/muted/opacity-70 + tracking-widest. */
+    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; }
+    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
+    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+
   </style>
 </head>
 <body>
@@ -55,7 +62,7 @@
     <div class="brand">
       <div class="mark">✱</div>
       <div>
-        <div class="name">AsterScan</div>
+        <div class="name"><span class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></span></div>
         <div class="meta">Aster Chain block explorer</div>
       </div>
     </div>

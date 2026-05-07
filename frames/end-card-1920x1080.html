@@ -31,13 +31,20 @@
     .by  { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #7A7770; letter-spacing: 0.22em; text-transform: uppercase; margin-top: 12px; }
 
     .accent-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, transparent, #F4D5B1, #FFD29F, transparent); }
+  
+    /* Brand wordmark — matches the live navbar: JetBrains Mono with
+       ASTER bold/primary + SCAN regular/muted/opacity-70 + tracking-widest. */
+    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; }
+    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
+    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+
   </style>
 </head>
 <body>
 
 <div class="frame">
   <div class="mark">✱</div>
-  <div class="name">AsterScan</div>
+  <div class="name"><span class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></span></div>
   <div class="url">aster-scan.com</div>
   <div class="by">Built by Kairos Lab</div>
   <div class="accent-line"></div>
