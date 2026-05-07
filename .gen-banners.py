@@ -508,10 +508,13 @@ def gen_overview() -> None:
   padding: 4px 10px; border-radius: 5px;
   text-transform: uppercase; letter-spacing: 0.2em;
 }
+/* 7 tiles laid out as 4-3 — flagship Private Mirror first row left,
+   3 v0.5 tiles to its right, 3 more tiles in the bottom row + a brand
+   tile filling the 4th slot so nothing orphans. */
 .tiles {
   flex: 1;
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr; gap: 12px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr; gap: 10px;
 }
 .tile {
   background: var(--surface);
@@ -519,15 +522,31 @@ def gen_overview() -> None:
   border-radius: 8px;
   overflow: hidden;
   display: flex; flex-direction: column;
+  min-height: 0;  /* lets grid track size dictate, prevents overflow */
 }
 .tile-visual {
-  position: relative; height: 70px;
+  position: relative; height: 56px; flex-shrink: 0;
   border-bottom: 1px solid rgba(250, 204, 21, 0.30);
   background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%,
     rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
+  overflow: hidden;
 }
-.tile-meta { padding: 10px 12px; display: flex; align-items: flex-start; gap: 10px; flex: 1; }
+.tile-meta { padding: 10px 12px; display: flex; align-items: flex-start; gap: 10px; flex: 1; min-height: 0; }
 .tile-meta > div { flex: 1; min-width: 0; }
+/* Brand tile filling the 8th cell — keeps the grid tidy */
+.tile.brand-tile {
+  background: linear-gradient(135deg, rgba(244, 213, 177, 0.06), rgba(14, 14, 15, 0.4));
+  border: 1px dashed rgba(244, 213, 177, 0.20);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 12px; gap: 6px;
+}
+.tile.brand-tile .bt-mark { width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), #FFD29F);
+  display: grid; place-items: center; color: var(--bg-primary); font-weight: 800; font-size: 18px; }
+.tile.brand-tile .bt-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--text-muted); letter-spacing: 0.16em; text-transform: uppercase;
+}
 .t-emoji { font-size: 22px; line-height: 1; }
 .t-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
 .t-tag { font-family: 'JetBrains Mono', monospace; font-style: italic;
@@ -559,13 +578,15 @@ def gen_overview() -> None:
     <span class="alpha-pill">7 tools</span>
   </div>
 
-  <div class="tiles">""" + tiles_html + """</div>
-
-  <div class="brand-stamp">
-    <span class="wm"><span class="a">ASTER</span><span class="s">SCAN</span></span>
-    <span class="sep">·</span>
-    <span>aster-scan.com/alpha</span>
-  </div>
+  <div class="tiles">""" + tiles_html + """
+        <div class="tile brand-tile">
+          <div class="bt-mark">✱</div>
+          <span class="wm" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; display:inline-flex; gap:1px;">
+            <span style="font-weight:700; color:#F4D5B1;">ASTER</span><span style="font-weight:400; color:#B9B5B0; opacity:0.7;">SCAN</span>
+          </span>
+          <span class="bt-label">aster-scan.com/alpha</span>
+        </div>
+      </div>
 </div>
 </body>
 </html>

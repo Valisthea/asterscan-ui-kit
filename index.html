@@ -408,42 +408,166 @@
 
     <!-- ── ALPHA ─────────────────────────────────────── -->
     <h2 id="alpha">Alpha banners <span class="src">/alpha/*.html · 1200×630 · animated</span></h2>
-    <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7A7770; margin-top:4px;">
-      One animated banner per alpha tool, reproducing the live <code>AlphaCardVisual</code> animation
-      (privacy / time / insight / mirror / xray / cascade / iceberg). Source · <code>src/components/alpha/AlphaCardVisual.tsx</code>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7A7770; margin-top:4px; margin-bottom:14px;">
+      One banner per alpha tool, mirroring the live <code>/alpha</code> card 1:1.
+      Source · <code>src/components/alpha/AlphaCardVisual.tsx</code>
     </p>
+
+    <style>
+      /* Compact alpha preview tile — visual + emoji + title + version pill.
+         Mirrors the live /alpha card density. No iframes — clean, fast, no overflow. */
+      .a-tile { display: flex; flex-direction: column; background: #161618; border: 1px solid #26262A; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 150ms; }
+      .a-tile:hover { border-color: rgba(250, 204, 21, 0.4); }
+      .a-tile-visual { position: relative; height: 90px; border-bottom: 1px solid rgba(250, 204, 21, 0.30);
+        background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%, rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
+        overflow: hidden; }
+      .a-tile-meta { padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+      .a-tile-emoji { font-size: 22px; line-height: 1; flex-shrink: 0; }
+      .a-tile-text { flex: 1; min-width: 0; }
+      .a-tile-name { font-size: 13px; font-weight: 600; color: #F2F0EE; }
+      .a-tile-tag { font-family: 'JetBrains Mono', monospace; font-style: italic; font-size: 10px; color: #7A7770; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .a-tile-ver { font-family: 'JetBrains Mono', monospace; font-size: 9px;
+        color: rgb(250, 204, 21); background: rgba(250, 204, 21, 0.10);
+        border: 1px solid rgba(250, 204, 21, 0.30);
+        padding: 2px 6px; border-radius: 3px;
+        text-transform: uppercase; letter-spacing: 0.18em; flex-shrink: 0; }
+      /* Mini animations re-used at small scale. Same keyframes as the live <AlphaCardVisual>. */
+      @keyframes alpha-scroll-y { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
+      @keyframes alpha-sweep    { 0% { transform: translateX(-10%); } 100% { transform: translateX(110%); } }
+      @keyframes alpha-bob      { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+      @keyframes alpha-pulse    { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+      @keyframes alpha-drop     { 0% { transform: scaleY(0.05); transform-origin: top; opacity: 0; } 10% { opacity: 1; } 100% { transform: scaleY(1); transform-origin: top; opacity: 1; } }
+      @keyframes alpha-fade-up  { 0% { opacity: 0; transform: translateY(4px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-4px); } }
+      @keyframes alpha-trail    { 0% { transform: translateX(0); } 100% { transform: translateX(82%); } }
+    </style>
+
     <div class="grid grid-3">
-      <a class="preview-card" href="/alpha/alpha-suite-overview.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-suite-overview.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Suite — Overview</span><span class="dim">v 2026-05-07</span></div>
+      <a class="a-tile" href="/alpha/alpha-suite-overview.html" target="_blank">
+        <div class="a-tile-visual" style="display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(250,204,21,0.7);letter-spacing:0.18em;text-transform:uppercase;">
+          ALL 7 TOOLS · SUITE
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">✱</span>
+          <div class="a-tile-text"><div class="a-tile-name">Suite — Overview</div><div class="a-tile-tag">8 tiles · banner</div></div>
+          <span class="a-tile-ver">v 2026</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-private-mirror.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-private-mirror.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Private Mirror</span><span class="dim">v 1.0 · privacy</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-private-mirror.html" target="_blank">
+        <div class="a-tile-visual">
+          <svg viewBox="0 0 200 80" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <text x="20" y="22" fill="rgba(250,204,21,0.55)" font-family="monospace" font-size="9">1f 9c 0a e3 5b</text>
+            <text x="20" y="36" fill="rgba(250,204,21,0.40)" font-family="monospace" font-size="9">e3 47 8d 22 c0</text>
+            <text x="20" y="50" fill="rgba(250,204,21,0.55)" font-family="monospace" font-size="9">9c 5b 0a 1f e3</text>
+            <text x="20" y="64" fill="rgba(250,204,21,0.30)" font-family="monospace" font-size="9">22 8d 47 c0 5b</text>
+          </svg>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">🌑</span>
+          <div class="a-tile-text"><div class="a-tile-name">Private Mirror</div><div class="a-tile-tag">privacy</div></div>
+          <span class="a-tile-ver">v1</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-time-machine.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-time-machine.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Time Machine</span><span class="dim">v 0.5 · time</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-time-machine.html" target="_blank">
+        <div class="a-tile-visual">
+          <svg viewBox="0 0 200 80" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <line x1="10" x2="190" y1="42" y2="42" stroke="rgba(250,204,21,0.3)" stroke-width="0.6"/>
+            <g style="animation:alpha-sweep 4s ease-in-out infinite alternate; transform-origin:0 0">
+              <line x1="5" x2="5" y1="28" y2="56" stroke="rgb(250,204,21)" stroke-width="1.2"/>
+              <circle cx="5" cy="42" r="2.5" fill="rgb(250,204,21)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">⏳</span>
+          <div class="a-tile-text"><div class="a-tile-name">Time Machine</div><div class="a-tile-tag">time</div></div>
+          <span class="a-tile-ver">v0.5</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-insight-engine.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-insight-engine.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Insight Engine</span><span class="dim">v 0.5 · insight</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-insight-engine.html" target="_blank">
+        <div class="a-tile-visual" style="display:flex;flex-direction:column;justify-content:center;padding:0 12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(250,204,21,0.75);line-height:1.6;gap:1px;">
+          <div>→ 0xa1b2 BUY $312k BTC</div>
+          <div>▲ Validator-2 +18 bps</div>
+          <div>◆ Privacy share 47%</div>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">🎙</span>
+          <div class="a-tile-text"><div class="a-tile-name">Insight Engine</div><div class="a-tile-tag">insight</div></div>
+          <span class="a-tile-ver">v0.5</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-smart-money-mirror.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-smart-money-mirror.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Smart Money Mirror</span><span class="dim">v 0.5 · mirror</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-smart-money-mirror.html" target="_blank">
+        <div class="a-tile-visual">
+          <svg viewBox="0 0 200 80" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <line x1="20" x2="180" y1="55" y2="55" stroke="rgba(250,204,21,0.2)" stroke-width="0.5" stroke-dasharray="2 3"/>
+            <line x1="20" x2="180" y1="28" y2="28" stroke="rgba(250,204,21,0.2)" stroke-width="0.5" stroke-dasharray="2 3"/>
+            <g style="animation:alpha-trail 3.5s ease-in-out infinite alternate"><circle cx="20" cy="28" r="3" fill="rgb(34,197,94)"/></g>
+            <g style="animation:alpha-trail 3.5s ease-in-out infinite alternate;animation-delay:0.6s"><circle cx="20" cy="55" r="2.5" fill="rgb(250,204,21)"/></g>
+          </svg>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">🪞</span>
+          <div class="a-tile-text"><div class="a-tile-name">Smart Money Mirror</div><div class="a-tile-tag">mirror</div></div>
+          <span class="a-tile-ver">v0.5</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-validator-xray.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-validator-xray.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Validator X-Ray</span><span class="dim">v 0.5 · xray</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-validator-xray.html" target="_blank">
+        <div class="a-tile-visual">
+          <svg viewBox="0 0 200 80" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <line x1="10" x2="190" y1="45" y2="45" stroke="rgba(250,204,21,0.15)" stroke-width="0.4"/>
+            <g style="animation:alpha-pulse 2.4s ease-in-out infinite"><circle cx="25" cy="45" r="3" fill="rgba(250,204,21,0.7)"/></g>
+            <g style="animation:alpha-pulse 2.4s ease-in-out infinite;animation-delay:0.4s"><circle cx="55" cy="45" r="3" fill="rgba(250,204,21,0.7)"/></g>
+            <g style="animation:alpha-pulse 2.4s ease-in-out infinite;animation-delay:0.8s"><circle cx="85" cy="45" r="3" fill="rgba(250,204,21,0.7)"/></g>
+            <g style="animation:alpha-pulse 2.4s ease-in-out infinite;animation-delay:1.2s"><circle cx="115" cy="45" r="3" fill="rgba(250,204,21,0.7)"/></g>
+            <g style="animation:alpha-pulse 2.4s ease-in-out infinite;animation-delay:1.6s"><circle cx="145" cy="45" r="3" fill="rgba(250,204,21,0.7)"/></g>
+            <g style="animation:alpha-pulse 2.4s ease-in-out infinite;animation-delay:2s"><circle cx="175" cy="45" r="3" fill="rgba(250,204,21,0.7)"/></g>
+            <line x1="0" x2="0" y1="5" y2="75" stroke="rgba(250,204,21,0.5)" stroke-width="1" style="animation:alpha-sweep 3s ease-in-out infinite alternate;transform-origin:0 0"/>
+          </svg>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">🎯</span>
+          <div class="a-tile-text"><div class="a-tile-name">Validator X-Ray</div><div class="a-tile-tag">xray</div></div>
+          <span class="a-tile-ver">v0.5</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-liquidation-forecaster.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-liquidation-forecaster.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Liquidation Forecaster</span><span class="dim">v 0.5 · cascade</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-liquidation-forecaster.html" target="_blank">
+        <div class="a-tile-visual" style="display:flex;align-items:flex-end;justify-content:space-around;padding:0 12px 6px;">
+          <div style="width:6px;height:40%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite"></div>
+          <div style="width:6px;height:65%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:0.18s"></div>
+          <div style="width:6px;height:50%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:0.36s"></div>
+          <div style="width:6px;height:75%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:0.54s"></div>
+          <div style="width:6px;height:55%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:0.72s"></div>
+          <div style="width:6px;height:80%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:0.9s"></div>
+          <div style="width:6px;height:45%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:1.08s"></div>
+          <div style="width:6px;height:60%;background:linear-gradient(to top,rgba(239,68,68,0.7),rgba(250,204,21,0.4));border-radius:1px 1px 0 0;animation:alpha-drop 2.6s ease-out infinite;animation-delay:1.26s"></div>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">🌪️</span>
+          <div class="a-tile-text"><div class="a-tile-name">Liquidation Forecaster</div><div class="a-tile-tag">cascade</div></div>
+          <span class="a-tile-ver">v0.5</span>
+        </div>
       </a>
-      <a class="preview-card" href="/alpha/alpha-iceberg-hunter.html">
-        <div class="visual" style="background:#0E0E0F;"><iframe src="/alpha/alpha-iceberg-hunter.html" style="border:0; width:1200px; height:630px; transform:scale(0.30); transform-origin:0 0; pointer-events:none;"></iframe></div>
-        <div class="meta-bar"><span class="label">Iceberg Hunter</span><span class="dim">v 0.5 · iceberg</span></div>
+
+      <a class="a-tile" href="/alpha/alpha-iceberg-hunter.html" target="_blank">
+        <div class="a-tile-visual">
+          <svg viewBox="0 0 200 80" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+            <line x1="0" x2="200" y1="35" y2="35" stroke="rgba(56,189,248,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
+            <g style="animation:alpha-bob 4s ease-in-out infinite">
+              <polygon points="100,15 90,35 110,35" fill="rgba(250,204,21,0.85)"/>
+              <polygon points="80,35 100,75 120,35 115,55 85,55" fill="rgba(250,204,21,0.25)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="a-tile-meta">
+          <span class="a-tile-emoji">🧊</span>
+          <div class="a-tile-text"><div class="a-tile-name">Iceberg Hunter</div><div class="a-tile-tag">iceberg</div></div>
+          <span class="a-tile-ver">v0.5</span>
+        </div>
       </a>
     </div>
 
