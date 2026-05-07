@@ -2,19 +2,15 @@
 """
 Generate the 7 alpha banners + 1 suite overview at 1200x630.
 
-Each banner reproduces the live <AlphaCardVisual> animation for that
-theme exactly (privacy / time / insight / mirror / xray / cascade /
-iceberg) so the press kit ships the same animated thumbnails the
-designer sees on /alpha. Pure SVG + CSS keyframes — no JS.
+Reproduces the *live* alpha card from src/app/alpha/page.tsx as it
+ships on aster-scan.com/alpha — same .card background, same animated
+<AlphaCardVisual> at the top, emoji + version pill, title, italic
+mono tagline, description paragraph, capabilities list with yellow
+arrow markers. No branded marketing chrome, no headline. The banner
+IS the production card, scaled up to 1200x630.
 
-Tool list mirrors src/app/alpha/page.tsx FEATURES exactly:
-  Private Mirror     · privacy · v1
-  Time Machine       · time    · v0.5
-  Insight Engine     · insight · v0.5
-  Smart Money Mirror · mirror  · v0.5
-  Validator X-Ray    · xray    · v0.5
-  Liquidation F.     · cascade · v0.5
-  Iceberg Hunter     · iceberg · v0.5
+Tool list, taglines, descriptions, capabilities, status pills, emojis
+mirror src/app/alpha/page.tsx FEATURES exactly.
 
 Run from C:\\Users\\admin\\Desktop\\asterscan-ui-kit:
   python .gen-banners.py
@@ -25,88 +21,90 @@ from pathlib import Path
 OUT = Path(__file__).parent / "alpha"
 OUT.mkdir(parents=True, exist_ok=True)
 
-# ── Shared stylesheet + keyframes ─────────────────────────────
+# ── Common stylesheet — matches Tailwind tokens from the live site ──
 COMMON_CSS = r"""
 * { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #0E0E0F;
+  --surface: #161618;
+  --surface-raised: #1C1C1F;
+  --border: #26262A;
+  --text-primary: #F2F0EE;
+  --text-secondary: #B9B5B0;
+  --text-muted: #7A7770;
+  --primary: #F4D5B1;
+  --yellow-400: rgb(250, 204, 21);
+}
 body {
   background: #2a2a2c; padding: 24px;
   font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text-primary);
 }
+
+/* The banner IS the .card from globals.css, scaled to 1200x630. */
 .banner {
   width: 1200px; height: 630px;
-  background:
-    radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
-    linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
-  color: #F2F0EE;
-  padding: 60px 70px;
-  display: grid; grid-template-rows: auto 1fr auto;
-  gap: 32px;
-  position: relative; overflow: hidden;
-  border-radius: 18px;
-}
-.banner::after {
-  content: ''; position: absolute; left: 0; bottom: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, transparent, #F4D5B1, #FFD29F, transparent);
-}
-
-/* Top row — brand + version */
-.head { display: flex; align-items: center; justify-content: space-between; }
-.brand { display: flex; align-items: center; gap: 14px; }
-.brand .mark { width: 48px; height: 48px; border-radius: 12px;
-  background: linear-gradient(135deg, #F4D5B1, #FFD29F);
-  display: grid; place-items: center; color: #0E0E0F;
-  font-weight: 800; font-size: 24px; }
-.brand .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;
-  display: inline-flex; align-items: baseline; gap: 1px; font-size: 16px; }
-.brand .wordmark .aster { font-weight: 700; color: #F4D5B1; }
-.brand .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
-.brand .meta { font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: #7A7770; letter-spacing: 0.18em;
-  text-transform: uppercase; margin-top: 4px; }
-
-.version-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 12px; border-radius: 6px;
-  background: rgba(244, 213, 177, 0.15);
-  color: #F4D5B1;
-  font-family: 'JetBrains Mono', monospace; font-weight: 700;
-  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-  border: 1px solid rgba(244, 213, 177, 0.25);
-}
-
-/* Animated visual card — mimics .alpha-visual on the live site */
-.visual-card {
-  position: relative;
-  width: 100%; height: 280px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
   border-radius: 12px;
+  padding: 60px;
+  display: flex; flex-direction: column; gap: 24px;
+  position: relative; overflow: hidden;
+}
+
+/* AlphaCardVisual — pixel-for-pixel from src/components/alpha/AlphaCardVisual.tsx */
+.alpha-visual {
+  position: relative;
+  width: 100%; height: 200px;
+  border-radius: 8px;
   border: 1px solid rgba(250, 204, 21, 0.40);
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%, rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
   overflow: hidden;
   box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg,
+    rgba(250, 204, 21, 0.10) 0%,
+    rgba(14, 14, 15, 0.60) 50%,
+    rgba(250, 204, 21, 0.15) 100%);
 }
 
-/* Title row */
-.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
-.title-row .lhs { max-width: 720px; }
-.title-row h1 {
-  font-size: 56px; font-weight: 800; letter-spacing: -0.025em;
-  line-height: 1.05;
-}
-.title-row h1 .accent { color: #F4D5B1; }
-.title-row .tag {
-  font-family: 'JetBrains Mono', monospace; font-style: italic;
-  font-size: 18px; color: #B9B5B0; line-height: 1.5;
-  margin-top: 16px;
-}
-.title-row .url {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px; color: #7A7770;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  text-align: right; flex-shrink: 0;
+/* Header row: emoji left, version pill right */
+.head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.emoji { font-size: 56px; line-height: 1; }
+.status {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+  color: var(--yellow-400); background: rgba(250, 204, 21, 0.10);
+  border: 1px solid rgba(250, 204, 21, 0.30);
+  padding: 5px 12px; border-radius: 5px;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  white-space: nowrap; align-self: flex-start; margin-top: 14px;
 }
 
-/* ── Animation keyframes ── */
+/* Title + tagline + description */
+.title { font-size: 44px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.1; margin-top: -8px; }
+.tagline { font-family: 'JetBrains Mono', monospace; font-style: italic;
+  font-size: 17px; color: var(--text-muted); margin-top: 6px; }
+.description { font-size: 17px; color: var(--text-secondary); line-height: 1.55; }
+
+/* Capabilities list */
+.caps {
+  list-style: none; padding-top: 16px; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 8px; margin-top: auto;
+}
+.caps li { font-size: 14px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+.caps li::before { content: "▸"; color: var(--yellow-400); flex-shrink: 0; margin-top: 1px; }
+
+/* Brand stamp bottom-right (small, unobtrusive — matches what the explorer footer would show) */
+.brand-stamp {
+  position: absolute; bottom: 18px; right: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.brand-stamp .wm { display: inline-flex; align-items: baseline; gap: 1px; letter-spacing: 0.1em; font-size: 11px; }
+.brand-stamp .wm .a { font-weight: 700; color: var(--primary); }
+.brand-stamp .wm .s { font-weight: 400; color: var(--text-secondary); opacity: 0.7; }
+.brand-stamp .sep { opacity: 0.4; }
+
+/* Animation keyframes (1:1 from AlphaCardVisual.tsx) */
 @keyframes alpha-scroll-y { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
 @keyframes alpha-sweep    { 0% { transform: translateX(-10%); } 100% { transform: translateX(110%); } }
 @keyframes alpha-bob      { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
@@ -114,9 +112,10 @@ body {
 @keyframes alpha-drop     { 0% { transform: scaleY(0.05); transform-origin: top; opacity: 0; } 10% { opacity: 1; } 100% { transform: scaleY(1); transform-origin: top; opacity: 1; } }
 @keyframes alpha-fade-up  { 0% { opacity: 0; transform: translateY(4px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-4px); } }
 @keyframes alpha-trail    { 0% { transform: translateX(0); } 100% { transform: translateX(82%); } }
+@media (prefers-reduced-motion: reduce) { .alpha-visual *, .alpha-visual { animation: none !important; } }
 """
 
-PAGE_HEAD = """<!doctype html>
+PAGE_TPL = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -126,37 +125,43 @@ PAGE_HEAD = """<!doctype html>
 </head>
 <body>
 <div class="banner">
-  <div class="head">
-    <div class="brand">
-      <div class="mark">✱</div>
-      <div>
-        <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
-        <div class="meta">Alpha · {theme_label}</div>
-      </div>
+  <div class="alpha-visual">{visual}</div>
+
+  <div class="head-row">
+    <div>
+      <span class="emoji">{emoji}</span>
     </div>
-    <div class="version-pill">{version}</div>
+    <span class="status">{status}</span>
   </div>
 
-  <div class="visual-card">{visual}</div>
+  <div>
+    <h1 class="title">{title}</h1>
+    <p class="tagline">{tagline}</p>
+  </div>
 
-  <div class="title-row">
-    <div class="lhs">
-      <h1>{headline_html}</h1>
-      <div class="tag">{tagline}</div>
-    </div>
-    <div class="url">aster-scan.com/alpha</div>
+  <p class="description">{description}</p>
+
+  <ul class="caps">
+    {caps_html}
+  </ul>
+
+  <div class="brand-stamp">
+    <span class="wm"><span class="a">ASTER</span><span class="s">SCAN</span></span>
+    <span class="sep">·</span>
+    <span>aster-scan.com/alpha</span>
   </div>
 </div>
 </body>
 </html>
 """
 
-# ── Per-theme animated visual HTML (1:1 from AlphaCardVisual.tsx) ──
+
+# ── Per-theme animated visuals (1:1 from AlphaCardVisual.tsx) ──
 
 def visual_privacy() -> str:
     cols = ["1f", "9c", "0a", "e3", "5b", "47", "8d", "22", "c0"] * 2
     columns = ""
-    for i in range(8):  # more columns for the bigger banner canvas
+    for i in range(8):
         spans = ""
         for j, c in enumerate(cols):
             opacity = 0.3 + ((i + j) % 5) * 0.14
@@ -170,9 +175,9 @@ def visual_privacy() -> str:
     return f"""
     <style>
       .pgrid {{ position: absolute; inset: 0; display: flex; justify-content: space-around;
-        align-items: stretch; padding: 0 30px; font-family: 'JetBrains Mono', monospace;
-        font-size: 24px; color: rgba(250, 204, 21, 0.55); user-select: none; }}
-      .pcol {{ display: flex; flex-direction: column; align-items: center; line-height: 1.15; }}
+        align-items: stretch; padding: 0 18px; font-family: 'JetBrains Mono', monospace;
+        font-size: 14px; color: rgba(250, 204, 21, 0.55); user-select: none; }}
+      .pcol {{ display: flex; flex-direction: column; align-items: center; line-height: 1.2; }}
       .pcol span {{ display: block; }}
       .pfade {{ position: absolute; inset: 0; pointer-events: none;
         background: linear-gradient(to bottom, transparent, transparent, rgba(14, 14, 15, 0.85)); }}
@@ -222,8 +227,8 @@ def visual_insight() -> str:
     return f"""
     <style>
       .ilines {{ position: absolute; inset: 0; display: flex; flex-direction: column;
-        justify-content: center; padding: 0 36px; font-family: 'JetBrains Mono', monospace;
-        font-size: 22px; color: rgba(250, 204, 21, 0.75); line-height: 1.7;
+        justify-content: center; padding: 0 24px; font-family: 'JetBrains Mono', monospace;
+        font-size: 14px; color: rgba(250, 204, 21, 0.75); line-height: 1.7;
         font-weight: 500; }}
       .iline {{ opacity: 0; }}
     </style>
@@ -286,8 +291,8 @@ def visual_cascade() -> str:
     return f"""
     <style>
       .cwrap {{ position: absolute; inset: 0; display: flex; align-items: flex-end;
-        justify-content: space-around; padding: 0 24px 12px; }}
-      .cwrap .bar {{ width: 18px; border-radius: 3px 3px 0 0;
+        justify-content: space-around; padding: 0 14px 8px; }}
+      .cwrap .bar {{ width: 12px; border-radius: 2px 2px 0 0;
         background: linear-gradient(to top, rgba(239, 68, 68, 0.7) 0%,
           rgba(239, 68, 68, 0.5) 50%, rgba(250, 204, 21, 0.4) 100%); }}
     </style>
@@ -323,75 +328,128 @@ VISUALS = {
     "iceberg": visual_iceberg,
 }
 
-# ── 7 tools mirroring src/app/alpha/page.tsx FEATURES ──
+# ── 7 features mirroring src/app/alpha/page.tsx FEATURES verbatim ──
 FEATURES = [
     {
         "slug": "alpha-private-mirror",
-        "title": "Private Mirror",
-        "headline_html": 'Private <span class="accent">Mirror</span>',
+        "emoji": "🌑",
         "theme": "privacy",
+        "title": "Private Mirror",
         "tagline": "Inferring signal from encrypted on-chain traffic.",
-        "version": "v 1.0",
+        "description":
+            "Around 70-90% of Aster Chain traffic uses privacy mode — encrypted order payloads. "
+            "Every other explorer treats those as black holes. Private Mirror reads the metadata that's "
+            "still public (timing, size class, sender, validator) and infers aggregate flows.",
+        "capabilities": [
+            "Long/short bias gauge with confidence interval",
+            "Privacy whale heatmap (size-classed, anonymized)",
+            "Correlated address clusters via co-occurrence inference",
+        ],
+        "status": "v1",
     },
     {
         "slug": "alpha-time-machine",
-        "title": "Time Machine",
-        "headline_html": 'Time <span class="accent">Machine</span>',
+        "emoji": "⏳",
         "theme": "time",
+        "title": "Time Machine",
         "tagline": "Rewind any moment of Aster Chain.",
-        "version": "v 0.5",
+        "description":
+            "Pick a block height — see the full state of the network at that exact instant. "
+            "Validator set, total stake, top tickers, oracle prices, average APY, privacy adoption. "
+            "Built for forensics, journalists, and traders post-morteming a cascade or oracle spike.",
+        "capabilities": [
+            "Block-level scrubber across full chain history",
+            "Snapshot of network stats at any height",
+            "Compare two moments side by side",
+        ],
+        "status": "v0.5",
     },
     {
         "slug": "alpha-insight-engine",
-        "title": "Insight Engine",
-        "headline_html": 'Insight <span class="accent">Engine</span>',
+        "emoji": "🎙",
         "theme": "insight",
+        "title": "Insight Engine",
         "tagline": "Aster Chain narrated in plain English.",
-        "version": "v 0.5",
+        "description":
+            "A rule-based engine watching the chain in real time and producing observations the way "
+            "a quant analyst would. Whale moves contextualized, validator anomalies surfaced, privacy "
+            "adoption shifts annotated. Generates a Daily Brief at 00:00 UTC.",
+        "capabilities": [
+            "Live observation feed (10–30 events/hour)",
+            "Daily Brief auto-generated at 00:00 UTC",
+            "Per-event evidence trail (the underlying tx / metric chain)",
+        ],
+        "status": "v0.5",
     },
     {
         "slug": "alpha-smart-money-mirror",
-        "title": "Smart Money Mirror",
-        "headline_html": 'Smart Money <span class="accent">Mirror</span>',
+        "emoji": "🪞",
         "theme": "mirror",
+        "title": "Smart Money Mirror",
         "tagline": "Wallets that move BEFORE the move.",
-        "version": "v 0.5",
+        "description":
+            "We identify the wallets whose whale orders preceded favorable price moves over a rolling "
+            "30-day window. Each address gets a predictive accuracy score, weighted by sample size and "
+            "decayed for inactive periods. Top of the leaderboard = the addresses worth watching.",
+        "capabilities": [
+            "Per-address predictive accuracy (1h / 6h / 24h)",
+            "Sample-size-weighted scoring (no one-shot luck)",
+            "Top-100 leaderboard with side-distribution",
+        ],
+        "status": "v0.5",
     },
     {
         "slug": "alpha-validator-xray",
-        "title": "Validator X-Ray",
-        "headline_html": 'Validator <span class="accent">X-Ray</span>',
+        "emoji": "🎯",
         "theme": "xray",
+        "title": "Validator X-Ray",
         "tagline": "Per-validator forensics ahead of external set opening.",
-        "version": "v 0.5",
+        "description":
+            "The Aster oracle is a stake-weighted median across 6 validators. When external validators "
+            "open in Q2 2026, the difference between a good validator and a bad one starts mattering. "
+            "X-Ray decomposes each validator's behavior — deviation, latency, stake concentration.",
+        "capabilities": [
+            "Oracle deviation per validator (rolling 24h)",
+            "Stake concentration (Gini) + delegation churn",
+            "Slashing risk score with full evidence trail",
+        ],
+        "status": "v0.5",
     },
     {
         "slug": "alpha-liquidation-forecaster",
-        "title": "Liquidation Forecaster",
-        "headline_html": 'Liquidation <span class="accent">Forecaster</span>',
+        "emoji": "🌪️",
         "theme": "cascade",
+        "title": "Liquidation Forecaster",
         "tagline": "Cascade simulation across leverage tiers.",
-        "version": "v 0.5",
+        "description":
+            "Aster's leverage ladder (Pro up to 100x, 1001x mode on BTC/ETH) means liquidation cascades "
+            "hit different tiers at different prices. The Forecaster simulates: at -1% / -2% / -5% / -10% "
+            "from spot, what tier liquidates first, total notional unwound, projected funding spike.",
+        "capabilities": [
+            "Forward cascade simulation (-1% to -10% bands)",
+            "Per-tier breakdown (Pro 5x→100x, 1001x BTC/ETH)",
+            "Cross vs isolated margin separation",
+        ],
+        "status": "v0.5",
     },
     {
         "slug": "alpha-iceberg-hunter",
-        "title": "Iceberg Hunter",
-        "headline_html": 'Iceberg <span class="accent">Hunter</span>',
+        "emoji": "🧊",
         "theme": "iceberg",
+        "title": "Iceberg Hunter",
         "tagline": "Whales splitting orders to hide their hand.",
-        "version": "v 0.5",
+        "description":
+            "Some whales avoid market impact by splitting one $5M order into 50 smaller privacy orders "
+            "fired in a tight time window. Iceberg Hunter focuses on the intra-wallet pattern: same "
+            "sender + N privacy orders within W seconds + size-class clustering = iceberg signal.",
+        "capabilities": [
+            "Per-wallet iceberg score (intra-window cohesion)",
+            "Live feed of detected icebergs (last 6h)",
+            "Methodology disclosed: false-positive rate calibration",
+        ],
+        "status": "v0.5",
     },
 ]
-
-THEME_LABELS = {
-    "privacy": "ZK · Privacy mode",
-    "time":    "Block-state replay",
-    "insight": "Plain-language feed",
-    "mirror":  "Lead-lag detection",
-    "xray":    "Validator forensics",
-    "cascade": "Liquidation cascade",
-    "iceberg": "Hidden liquidity",
-}
 
 
 def write_page(slug: str, html: str) -> None:
@@ -403,20 +461,23 @@ def write_page(slug: str, html: str) -> None:
 def gen_individual() -> None:
     for f in FEATURES:
         visual = VISUALS[f["theme"]]()
-        html = PAGE_HEAD.format(
+        caps_html = "\n    ".join(f"<li>{c}</li>" for c in f["capabilities"])
+        html = PAGE_TPL.format(
             title=f["title"],
             css=COMMON_CSS,
-            theme_label=THEME_LABELS[f["theme"]],
-            version=f["version"],
             visual=visual,
-            headline_html=f["headline_html"],
+            emoji=f["emoji"],
+            status=f["status"],
             tagline=f["tagline"],
+            description=f["description"],
+            caps_html=caps_html,
         )
         write_page(f["slug"], html)
 
 
 def gen_overview() -> None:
-    """Composite banner showing all 7 alpha tiles in a 4-3 grid."""
+    """Suite overview — same 3-column grid as the live /alpha page,
+    showing all 7 cards as compact tiles. Reproduces the live gallery."""
     tiles_html = ""
     for f in FEATURES:
         v = VISUALS[f["theme"]]()
@@ -424,73 +485,87 @@ def gen_overview() -> None:
         <div class="tile">
           <div class="tile-visual">{v}</div>
           <div class="tile-meta">
-            <div class="tile-title">{f["title"]}</div>
-            <div class="tile-ver">{f["version"]}</div>
+            <span class="t-emoji">{f["emoji"]}</span>
+            <div>
+              <div class="t-title">{f["title"]}</div>
+              <div class="t-tag">{f["tagline"]}</div>
+            </div>
+            <span class="t-ver">{f["status"]}</span>
           </div>
         </div>
         """
 
     overview_css = COMMON_CSS + r"""
-.banner {
-  display: flex; flex-direction: column; gap: 28px;
-  padding: 50px 60px;
+.banner { padding: 40px 50px; gap: 18px; }
+.head-overview { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.head-overview h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; }
+.head-overview .sub { font-family: 'JetBrains Mono', monospace; font-style: italic;
+  font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+.head-overview .alpha-pill {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+  color: var(--yellow-400); background: rgba(250, 204, 21, 0.10);
+  border: 1px solid rgba(250, 204, 21, 0.30);
+  padding: 4px 10px; border-radius: 5px;
+  text-transform: uppercase; letter-spacing: 0.2em;
 }
-.title-row h1 { font-size: 48px; }
 .tiles {
   flex: 1;
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 14px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr; gap: 12px;
 }
 .tile {
-  background: rgba(22, 22, 24, 0.7);
-  border: 1px solid #26262A;
-  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   overflow: hidden;
   display: flex; flex-direction: column;
 }
 .tile-visual {
-  position: relative; flex: 1; min-height: 90px;
+  position: relative; height: 70px;
   border-bottom: 1px solid rgba(250, 204, 21, 0.30);
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%, rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%,
+    rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
 }
-.tile-meta { padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.tile-title { font-size: 13px; font-weight: 600; color: #F2F0EE; }
-.tile-ver { font-family: 'JetBrains Mono', monospace; font-size: 9px;
-  color: #F4D5B1; background: rgba(244, 213, 177, 0.12);
-  padding: 2px 6px; border-radius: 3px; letter-spacing: 0.1em; text-transform: uppercase; }
+.tile-meta { padding: 10px 12px; display: flex; align-items: flex-start; gap: 10px; flex: 1; }
+.tile-meta > div { flex: 1; min-width: 0; }
+.t-emoji { font-size: 22px; line-height: 1; }
+.t-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.t-tag { font-family: 'JetBrains Mono', monospace; font-style: italic;
+  font-size: 10px; color: var(--text-muted); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.t-ver { font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  color: var(--yellow-400); background: rgba(250, 204, 21, 0.10);
+  border: 1px solid rgba(250, 204, 21, 0.30);
+  padding: 2px 5px; border-radius: 3px;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  align-self: flex-start; }
 """
 
     html = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>AsterScan Alpha — Suite Overview</title>
+  <title>AsterScan Alpha — Suite</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>""" + overview_css + """</style>
 </head>
 <body>
 <div class="banner">
-  <div class="head">
-    <div class="brand">
-      <div class="mark">✱</div>
-      <div>
-        <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
-        <div class="meta">Alpha suite · 7 experimental tools</div>
-      </div>
+  <div class="head-overview">
+    <div>
+      <h1>AsterScan Alpha</h1>
+      <p class="sub">Experimental features pushing the boundaries of what's observable on Aster Chain.</p>
     </div>
-    <div class="version-pill">v 2026-05-07</div>
-  </div>
-
-  <div class="title-row">
-    <div class="lhs">
-      <h1>The <span class="accent">Alpha</span> suite.</h1>
-      <div class="tag">Seven experimental tools — privacy mirror, replay, narration, copy-trading, validator forensics, cascade forecasting, hidden-liquidity detection.</div>
-    </div>
-    <div class="url">aster-scan.com/alpha</div>
+    <span class="alpha-pill">7 tools</span>
   </div>
 
   <div class="tiles">""" + tiles_html + """</div>
+
+  <div class="brand-stamp">
+    <span class="wm"><span class="a">ASTER</span><span class="s">SCAN</span></span>
+    <span class="sep">·</span>
+    <span>aster-scan.com/alpha</span>
+  </div>
 </div>
 </body>
 </html>
@@ -499,7 +574,7 @@ def gen_overview() -> None:
 
 
 if __name__ == "__main__":
-    print("Generating alpha banners → /alpha/")
+    print("Generating alpha banners -> /alpha/")
     gen_individual()
     gen_overview()
     print(f"\nDone. {len(FEATURES) + 1} files in {OUT.relative_to(OUT.parent)}/")

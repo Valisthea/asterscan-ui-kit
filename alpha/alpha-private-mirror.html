@@ -6,85 +6,87 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #0E0E0F;
+  --surface: #161618;
+  --surface-raised: #1C1C1F;
+  --border: #26262A;
+  --text-primary: #F2F0EE;
+  --text-secondary: #B9B5B0;
+  --text-muted: #7A7770;
+  --primary: #F4D5B1;
+  --yellow-400: rgb(250, 204, 21);
+}
 body {
   background: #2a2a2c; padding: 24px;
   font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text-primary);
 }
+
+/* The banner IS the .card from globals.css, scaled to 1200x630. */
 .banner {
   width: 1200px; height: 630px;
-  background:
-    radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
-    linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
-  color: #F2F0EE;
-  padding: 60px 70px;
-  display: grid; grid-template-rows: auto 1fr auto;
-  gap: 32px;
-  position: relative; overflow: hidden;
-  border-radius: 18px;
-}
-.banner::after {
-  content: ''; position: absolute; left: 0; bottom: 0;
-  width: 100%; height: 4px;
-  background: linear-gradient(90deg, transparent, #F4D5B1, #FFD29F, transparent);
-}
-
-/* Top row — brand + version */
-.head { display: flex; align-items: center; justify-content: space-between; }
-.brand { display: flex; align-items: center; gap: 14px; }
-.brand .mark { width: 48px; height: 48px; border-radius: 12px;
-  background: linear-gradient(135deg, #F4D5B1, #FFD29F);
-  display: grid; place-items: center; color: #0E0E0F;
-  font-weight: 800; font-size: 24px; }
-.brand .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;
-  display: inline-flex; align-items: baseline; gap: 1px; font-size: 16px; }
-.brand .wordmark .aster { font-weight: 700; color: #F4D5B1; }
-.brand .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
-.brand .meta { font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: #7A7770; letter-spacing: 0.18em;
-  text-transform: uppercase; margin-top: 4px; }
-
-.version-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 12px; border-radius: 6px;
-  background: rgba(244, 213, 177, 0.15);
-  color: #F4D5B1;
-  font-family: 'JetBrains Mono', monospace; font-weight: 700;
-  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-  border: 1px solid rgba(244, 213, 177, 0.25);
-}
-
-/* Animated visual card — mimics .alpha-visual on the live site */
-.visual-card {
-  position: relative;
-  width: 100%; height: 280px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
   border-radius: 12px;
+  padding: 60px;
+  display: flex; flex-direction: column; gap: 24px;
+  position: relative; overflow: hidden;
+}
+
+/* AlphaCardVisual — pixel-for-pixel from src/components/alpha/AlphaCardVisual.tsx */
+.alpha-visual {
+  position: relative;
+  width: 100%; height: 200px;
+  border-radius: 8px;
   border: 1px solid rgba(250, 204, 21, 0.40);
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.10) 0%, rgba(14, 14, 15, 0.60) 50%, rgba(250, 204, 21, 0.15) 100%);
   overflow: hidden;
   box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg,
+    rgba(250, 204, 21, 0.10) 0%,
+    rgba(14, 14, 15, 0.60) 50%,
+    rgba(250, 204, 21, 0.15) 100%);
 }
 
-/* Title row */
-.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
-.title-row .lhs { max-width: 720px; }
-.title-row h1 {
-  font-size: 56px; font-weight: 800; letter-spacing: -0.025em;
-  line-height: 1.05;
-}
-.title-row h1 .accent { color: #F4D5B1; }
-.title-row .tag {
-  font-family: 'JetBrains Mono', monospace; font-style: italic;
-  font-size: 18px; color: #B9B5B0; line-height: 1.5;
-  margin-top: 16px;
-}
-.title-row .url {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px; color: #7A7770;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  text-align: right; flex-shrink: 0;
+/* Header row: emoji left, version pill right */
+.head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.emoji { font-size: 56px; line-height: 1; }
+.status {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+  color: var(--yellow-400); background: rgba(250, 204, 21, 0.10);
+  border: 1px solid rgba(250, 204, 21, 0.30);
+  padding: 5px 12px; border-radius: 5px;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  white-space: nowrap; align-self: flex-start; margin-top: 14px;
 }
 
-/* ── Animation keyframes ── */
+/* Title + tagline + description */
+.title { font-size: 44px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.1; margin-top: -8px; }
+.tagline { font-family: 'JetBrains Mono', monospace; font-style: italic;
+  font-size: 17px; color: var(--text-muted); margin-top: 6px; }
+.description { font-size: 17px; color: var(--text-secondary); line-height: 1.55; }
+
+/* Capabilities list */
+.caps {
+  list-style: none; padding-top: 16px; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 8px; margin-top: auto;
+}
+.caps li { font-size: 14px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+.caps li::before { content: "▸"; color: var(--yellow-400); flex-shrink: 0; margin-top: 1px; }
+
+/* Brand stamp bottom-right (small, unobtrusive — matches what the explorer footer would show) */
+.brand-stamp {
+  position: absolute; bottom: 18px; right: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.brand-stamp .wm { display: inline-flex; align-items: baseline; gap: 1px; letter-spacing: 0.1em; font-size: 11px; }
+.brand-stamp .wm .a { font-weight: 700; color: var(--primary); }
+.brand-stamp .wm .s { font-weight: 400; color: var(--text-secondary); opacity: 0.7; }
+.brand-stamp .sep { opacity: 0.4; }
+
+/* Animation keyframes (1:1 from AlphaCardVisual.tsx) */
 @keyframes alpha-scroll-y { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
 @keyframes alpha-sweep    { 0% { transform: translateX(-10%); } 100% { transform: translateX(110%); } }
 @keyframes alpha-bob      { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
@@ -92,27 +94,17 @@ body {
 @keyframes alpha-drop     { 0% { transform: scaleY(0.05); transform-origin: top; opacity: 0; } 10% { opacity: 1; } 100% { transform: scaleY(1); transform-origin: top; opacity: 1; } }
 @keyframes alpha-fade-up  { 0% { opacity: 0; transform: translateY(4px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-4px); } }
 @keyframes alpha-trail    { 0% { transform: translateX(0); } 100% { transform: translateX(82%); } }
+@media (prefers-reduced-motion: reduce) { .alpha-visual *, .alpha-visual { animation: none !important; } }
 </style>
 </head>
 <body>
 <div class="banner">
-  <div class="head">
-    <div class="brand">
-      <div class="mark">✱</div>
-      <div>
-        <div class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></div>
-        <div class="meta">Alpha · ZK · Privacy mode</div>
-      </div>
-    </div>
-    <div class="version-pill">v 1.0</div>
-  </div>
-
-  <div class="visual-card">
+  <div class="alpha-visual">
     <style>
       .pgrid { position: absolute; inset: 0; display: flex; justify-content: space-around;
-        align-items: stretch; padding: 0 30px; font-family: 'JetBrains Mono', monospace;
-        font-size: 24px; color: rgba(250, 204, 21, 0.55); user-select: none; }
-      .pcol { display: flex; flex-direction: column; align-items: center; line-height: 1.15; }
+        align-items: stretch; padding: 0 18px; font-family: 'JetBrains Mono', monospace;
+        font-size: 14px; color: rgba(250, 204, 21, 0.55); user-select: none; }
+      .pcol { display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
       .pcol span { display: block; }
       .pfade { position: absolute; inset: 0; pointer-events: none;
         background: linear-gradient(to bottom, transparent, transparent, rgba(14, 14, 15, 0.85)); }
@@ -121,12 +113,30 @@ body {
     <div class="pfade"></div>
     </div>
 
-  <div class="title-row">
-    <div class="lhs">
-      <h1>Private <span class="accent">Mirror</span></h1>
-      <div class="tag">Inferring signal from encrypted on-chain traffic.</div>
+  <div class="head-row">
+    <div>
+      <span class="emoji">🌑</span>
     </div>
-    <div class="url">aster-scan.com/alpha</div>
+    <span class="status">v1</span>
+  </div>
+
+  <div>
+    <h1 class="title">Private Mirror</h1>
+    <p class="tagline">Inferring signal from encrypted on-chain traffic.</p>
+  </div>
+
+  <p class="description">Around 70-90% of Aster Chain traffic uses privacy mode — encrypted order payloads. Every other explorer treats those as black holes. Private Mirror reads the metadata that's still public (timing, size class, sender, validator) and infers aggregate flows.</p>
+
+  <ul class="caps">
+    <li>Long/short bias gauge with confidence interval</li>
+    <li>Privacy whale heatmap (size-classed, anonymized)</li>
+    <li>Correlated address clusters via co-occurrence inference</li>
+  </ul>
+
+  <div class="brand-stamp">
+    <span class="wm"><span class="a">ASTER</span><span class="s">SCAN</span></span>
+    <span class="sep">·</span>
+    <span>aster-scan.com/alpha</span>
   </div>
 </div>
 </body>
