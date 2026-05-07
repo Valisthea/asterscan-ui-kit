@@ -4,281 +4,610 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="robots" content="noindex" />
-  <title>AsterScan — UI Components Gallery</title>
+  <title>AsterScan UI Kit — Components</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Self-contained — single-page gallery of UI atoms.
-       Open in browser → designer can screenshot any component +
-       drop directly into After Effects / Figma / Photoshop. */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0E0E0F; color: #F2F0EE; font-family: 'DM Sans', system-ui, sans-serif; padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
-    .head { padding-bottom: 22px; border-bottom: 1px solid #26262A; margin-bottom: 36px; }
-    .head h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
-    .head p  { font-size: 13px; color: #7A7770; margin-top: 4px; }
-    h2 { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #B9B5B0; margin: 36px 0 14px; }
-    .specimen { background: #161618; border: 1px solid #26262A; border-radius: 14px; padding: 28px; margin-bottom: 16px; }
-    .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .row + .row { margin-top: 16px; }
-    .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; text-transform: uppercase; letter-spacing: 0.16em; min-width: 90px; }
+    :root {
+      --bg: #0E0E0F;
+      --surface: #161618;
+      --surface-raised: #1C1C1F;
+      --surface-overlay: #252528;
+      --border: #26262A;
+      --border-strong: #3A3A3F;
+      --text-primary: #F2F0EE;
+      --text-secondary: #B9B5B0;
+      --text-muted: #7A7770;
+      --primary: #F4D5B1;
+      --primary-hover: #FFD29F;
+      --success: #22C55E;
+      --danger: #EF4444;
+      --warning: #F59E0B;
+      --info: #3B82F6;
+    }
+    html, body { background: var(--bg); color: var(--text-primary); font-family: 'DM Sans', system-ui, sans-serif; }
+    body { padding: 60px 24px 120px; max-width: 1080px; margin: 0 auto; }
+    a { color: var(--primary); }
 
-    /* ── BUTTONS ─────────────────────────────────────────── */
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: default; border: 1px solid transparent; transition: all 150ms; line-height: 1; }
-    .btn-primary { background: #F4D5B1; color: #0E0E0F; }
-    .btn-primary-hover { background: #FFD29F; color: #0E0E0F; }
-    .btn-secondary { background: rgba(244, 213, 177, 0.10); color: #F4D5B1; border-color: rgba(244, 213, 177, 0.30); }
-    .btn-secondary-hover { background: rgba(244, 213, 177, 0.20); color: #F4D5B1; border-color: rgba(244, 213, 177, 0.30); }
-    .btn-ghost { background: transparent; color: #B9B5B0; border-color: #26262A; }
-    .btn-ghost-hover { background: #1C1C1F; color: #F2F0EE; border-color: #3A3A3F; }
-    .btn-danger { background: rgba(239, 68, 68, 0.10); color: #EF4444; border-color: rgba(239, 68, 68, 0.30); }
-    .btn-success { background: rgba(34, 197, 94, 0.10); color: #22C55E; border-color: rgba(34, 197, 94, 0.30); }
-    .btn-disabled { background: #1C1C1F; color: #7A7770; border-color: #26262A; cursor: not-allowed; }
-    .btn-sm { padding: 7px 12px; font-size: 11px; }
-    .btn-lg { padding: 12px 22px; font-size: 14px; }
+    /* ---- Page chrome ---- */
+    .page-head { display: flex; align-items: center; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid var(--border); margin-bottom: 36px; }
+    .page-head .mark { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); display: grid; place-items: center; color: var(--bg); font-size: 28px; font-weight: 800; flex-shrink: 0; }
+    .page-head h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+    .page-head p { font-size: 13px; color: var(--text-muted); margin-top: 4px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
 
-    /* ── BADGES ──────────────────────────────────────────── */
-    .badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.4; }
-    .badge-primary { background: rgba(244, 213, 177, 0.15); color: #F4D5B1; border: 1px solid rgba(244, 213, 177, 0.30); }
-    .badge-success { background: rgba(34, 197, 94, 0.15); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.30); }
-    .badge-danger  { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.30); }
-    .badge-warning { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.30); }
-    .badge-info    { background: rgba(59, 130, 246, 0.15); color: #3B82F6; border: 1px solid rgba(59, 130, 246, 0.30); }
-    .badge-beta    { background: rgba(244, 213, 177, 0.15); color: #F4D5B1; letter-spacing: 0.18em; }
-    .badge-live { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; background: rgba(34, 197, 94, 0.15); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.30); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; }
-    .badge-live::before { content:''; width: 6px; height: 6px; background: #22C55E; border-radius: 9999px; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.4); }
+    /* ---- Section blocks ---- */
+    section { margin-top: 56px; scroll-margin-top: 24px; }
+    section:first-of-type { margin-top: 0; }
+    .sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px dashed var(--border); }
+    .sec-head h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+    .sec-head .src { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.02em; }
+    .sec-head .src code { color: var(--primary); }
+    .sec-head .src a { text-decoration: none; }
 
-    /* ── CARDS ──────────────────────────────────────────── */
-    .card { background: #161618; border: 1px solid #26262A; border-radius: 14px; padding: 22px; }
-    .card-raised { background: #1C1C1F; border: 1px solid #26262A; border-radius: 14px; padding: 22px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-    .card-header { padding: 14px 22px; border-bottom: 1px solid #26262A; display: flex; align-items: center; justify-content: space-between; }
-    .card-header h3 { font-size: 14px; font-weight: 600; }
-    .card-header .meta { font-size: 10px; color: #7A7770; text-transform: uppercase; letter-spacing: 0.16em; }
-    .card-body { padding: 22px; }
+    .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding: 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 14px; }
+    .row.col { flex-direction: column; align-items: stretch; }
+    .row-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.16em; text-transform: uppercase; min-width: 100%; margin-bottom: 4px; }
 
-    /* ── STAT CARDS ─────────────────────────────────────── */
-    .stat { background: #161618; border: 1px solid #26262A; border-radius: 14px; padding: 22px; min-width: 200px; }
-    .stat .stat-label { font-size: 10px; color: #7A7770; text-transform: uppercase; letter-spacing: 0.16em; }
-    .stat .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; color: #F2F0EE; margin-top: 6px; letter-spacing: -0.01em; }
-    .stat .stat-sub { font-size: 11px; color: #7A7770; margin-top: 6px; }
-    .stat-success .stat-value { color: #22C55E; }
-    .stat-danger  .stat-value { color: #EF4444; }
-    .stat-primary .stat-value {
-      background: linear-gradient(120deg, #F4D5B1, #FFD29F);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .grid { display: grid; gap: 14px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 720px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    /* ---- BUTTONS ---- */
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-weight: 500; border-radius: 8px; transition: all 150ms; cursor: pointer; white-space: nowrap; gap: 8px; border: 1px solid transparent; user-select: none; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    /* sizes */
+    .btn-huge    { height: 56px; padding: 0 28px; font-size: 16px; gap: 10px; }
+    .btn-large   { height: 48px; padding: 0 24px; font-size: 14px; gap: 8px; }
+    .btn-middle  { height: 40px; padding: 0 20px; font-size: 14px; gap: 8px; }
+    .btn-regular { height: 36px; padding: 0 16px; font-size: 14px; gap: 6px; }
+    .btn-small   { height: 32px; padding: 0 14px; font-size: 12px; gap: 6px; }
+    .btn-tiny    { height: 24px; padding: 0 10px; font-size: 11px; gap: 4px; }
+    /* variants */
+    .btn-primary    { background: var(--surface); color: var(--text-primary); border-color: var(--border-strong); }
+    .btn-primary:hover { background: var(--surface-overlay); }
+    .btn-sec-yellow { background: linear-gradient(180deg, #f4d9bb 0%, #d6b88a 100%); color: #2b1d0a; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.15); }
+    .btn-sec-grey   { background: linear-gradient(180deg, #efeae3 0%, #b9b5b0 100%); color: #333; box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.15); }
+    .btn-third      { background: transparent; color: var(--text-secondary); border-color: var(--border); }
+    .btn-third:hover { color: var(--text-primary); border-color: var(--border-strong); }
+    .btn-fourth     { background: transparent; color: var(--text-muted); }
+    .btn-fourth:hover { color: var(--text-secondary); }
+    .btn-text       { background: transparent; color: var(--primary); padding: 0 4px; }
+    .btn-text:hover { color: var(--primary-hover); }
+    .btn-text-link  { background: transparent; color: var(--primary); text-decoration: underline; text-decoration-style: dotted; padding: 0 4px; }
+    .btn-buy        { background: rgba(34, 197, 94, 0.10); color: var(--success); border-color: rgba(34, 197, 94, 0.20); font-weight: 600; }
+    .btn-buy:hover  { background: rgba(34, 197, 94, 0.20); }
+    .btn-sell       { background: rgba(239, 68, 68, 0.10); color: var(--danger); border-color: rgba(239, 68, 68, 0.20); font-weight: 600; }
+    .btn-sell:hover { background: rgba(239, 68, 68, 0.20); }
+
+    /* ---- BADGES ---- */
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; }
+    .badge-primary { background: rgba(244, 213, 177, 0.15); color: var(--primary); }
+    .badge-success { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+    .badge-danger  { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+    .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+    .badge-info    { background: rgba(59, 130, 246, 0.15); color: var(--info); }
+    .badge-muted   { background: var(--surface-overlay); color: var(--text-secondary); }
+
+    /* ---- INPUTS ---- */
+    .input, .select, .textarea {
+      background: var(--surface-raised); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text-primary); font: inherit; padding: 0 12px; height: 36px; min-width: 200px;
+      outline: none; transition: border-color 150ms;
+    }
+    .textarea { height: auto; padding: 10px 12px; resize: vertical; min-height: 80px; font-family: 'DM Sans', sans-serif; }
+    .input:focus, .select:focus, .textarea:focus { border-color: var(--primary); }
+    .input::placeholder { color: var(--text-muted); }
+    .input-group { display: flex; flex-direction: column; gap: 4px; }
+    .input-label { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+    .input-help  { font-size: 11px; color: var(--text-muted); }
+    .input-error { font-size: 11px; color: var(--danger); }
+
+    /* ---- CHECKBOX / RADIO / SWITCH ---- */
+    .checkbox { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+    .checkbox-box { width: 16px; height: 16px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface); display: grid; place-items: center; transition: all 150ms; }
+    .checkbox.on .checkbox-box { background: var(--primary); border-color: var(--primary); color: var(--bg); }
+    .checkbox.on .checkbox-box::after { content: "✓"; font-size: 11px; font-weight: 800; }
+    .checkbox.indeterminate .checkbox-box { background: var(--primary); border-color: var(--primary); }
+    .checkbox.indeterminate .checkbox-box::after { content: "—"; font-size: 11px; color: var(--bg); font-weight: 800; }
+    .switch { width: 36px; height: 20px; background: var(--surface-overlay); border-radius: 10px; position: relative; cursor: pointer; transition: background 150ms; }
+    .switch::after { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; background: var(--text-primary); border-radius: 50%; transition: transform 150ms; }
+    .switch.on { background: var(--primary); }
+    .switch.on::after { transform: translateX(16px); background: var(--bg); }
+
+    /* ---- CARD ---- */
+    .card-demo { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+    .card-demo h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .card-demo p  { font-size: 13px; color: var(--text-secondary); }
+
+    /* ---- STAT CARD ---- */
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .stat.compact { background: var(--surface-overlay); border: 0; padding: 10px 14px; border-radius: 8px; }
+    .stat.ghost   { background: transparent; border: 0; padding: 4px 0; }
+    .stat.highlight { border-color: rgba(244, 213, 177, 0.20); background: rgba(244, 213, 177, 0.05); }
+    .stat .lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+    .stat .lbl .help { display: inline-grid; place-items: center; width: 14px; height: 14px; border: 1px solid var(--border); border-radius: 50%; font-size: 9px; color: var(--text-muted); }
+    .stat .val { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 18px; color: var(--text-primary); }
+    .stat.compact .val, .stat.ghost .val { font-size: 14px; }
+    .stat .val.success { color: var(--success); }
+    .stat .val.danger  { color: var(--danger); }
+    .stat .val.muted   { color: var(--text-muted); }
+    .stat .val.primary { color: var(--primary); }
+    .stat .sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ---- TABS ---- */
+    .tabs { display: inline-flex; background: var(--surface-overlay); padding: 3px; border-radius: 10px; gap: 2px; }
+    .tabs button { background: transparent; color: var(--text-secondary); border: 0; cursor: pointer; padding: 6px 14px; border-radius: 7px; font: 500 13px 'DM Sans', sans-serif; transition: all 150ms; }
+    .tabs button:hover { color: var(--text-primary); }
+    .tabs button.active { background: var(--surface); color: var(--text-primary); }
+    .tabs button:disabled { color: var(--text-muted); opacity: 0.4; cursor: not-allowed; }
+    .tabs.tiny button { padding: 4px 10px; font-size: 12px; }
+
+    /* ---- PILLS / DATA AGE / KEYBOARD ---- */
+    .pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 9999px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; background: var(--surface-overlay); color: var(--text-secondary); }
+    .pill.dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--success); margin-right: 6px; }
+    .pill.dot.stale::before  { background: var(--warning); }
+    .pill.dot.dead::before   { background: var(--danger); }
+    kbd { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--surface-overlay); border: 1px solid var(--border-strong); border-bottom-width: 2px; border-radius: 5px; padding: 2px 6px; color: var(--text-secondary); }
+
+    /* ---- TABLE ROW ---- */
+    table.tbl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+    table.tbl th { text-align: left; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface); }
+    table.tbl td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; }
+    table.tbl tr:hover td { background: var(--surface-raised); }
+
+    /* ---- TOAST / NOTIFICATION ---- */
+    .toast { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--primary); border-radius: 10px; max-width: 360px; }
+    .toast.success { border-left-color: var(--success); }
+    .toast.danger  { border-left-color: var(--danger); }
+    .toast.warning { border-left-color: var(--warning); }
+    .toast .ico { font-size: 16px; line-height: 1; }
+    .toast .title { font-size: 13px; font-weight: 600; }
+    .toast .body  { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+    /* ---- TOOLTIP ---- */
+    .tip { display: inline-block; position: relative; }
+    .tip .pop {
+      position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      background: var(--surface-overlay); border: 1px solid var(--border-strong); padding: 6px 10px;
+      border-radius: 6px; font-size: 11px; color: var(--text-primary); white-space: nowrap;
     }
 
-    /* ── DATA AGE PILLS ─────────────────────────────────── */
-    .age { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 9999px; border: 1px solid; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; }
-    .age::before { content:''; width: 6px; height: 6px; border-radius: 9999px; background: var(--c); }
-    .age-live    { color: #22C55E; border-color: rgba(34, 197, 94, 0.30); --c: #22C55E; }
-    .age-fresh   { color: #22C55E; border-color: rgba(34, 197, 94, 0.25); --c: #22C55E; opacity: 0.85; }
-    .age-recent  { color: #B9B5B0; border-color: #26262A; --c: #7A7770; }
-    .age-stale   { color: #F59E0B; border-color: rgba(245, 158, 11, 0.30); --c: #F59E0B; }
-    .age-down    { color: #EF4444; border-color: rgba(239, 68, 68, 0.30); --c: #EF4444; }
+    /* ---- SKELETON ---- */
+    .skel { background: linear-gradient(90deg, var(--surface) 0%, var(--surface-raised) 50%, var(--surface) 100%); background-size: 200% 100%; animation: shimmer 1.6s infinite linear; border-radius: 6px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-    /* ── TABLE ROWS ─────────────────────────────────────── */
-    table.demo { width: 100%; border-collapse: collapse; font-size: 13px; }
-    table.demo thead { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: #7A7770; }
-    table.demo th, table.demo td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #26262A; }
-    table.demo td.num { font-family: 'JetBrains Mono', monospace; text-align: right; }
-    table.demo tr.hover td { background: rgba(244, 213, 177, 0.05); border-left: 2px solid #F4D5B1; }
-    table.demo tr.hover td:first-child { padding-left: 12px; }
-    .gain { color: #22C55E; }
-    .loss { color: #EF4444; }
+    /* ---- ADDRESS / HASH LINK / COPY ---- */
+    .addr { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-secondary); display: inline-flex; gap: 6px; align-items: center; }
+    .addr .copy { background: transparent; border: 0; color: var(--text-muted); cursor: pointer; padding: 2px; }
+    .addr .copy:hover { color: var(--primary); }
 
-    /* ── BARS / PROGRESS ────────────────────────────────── */
-    .bar-wrap { display: flex; height: 14px; border-radius: 4px; background: #1C1C1F; overflow: hidden; }
-    .bar-l { background: #22C55E; }
-    .bar-s { background: #EF4444; }
-    .bar-cliff { background: rgba(245, 158, 11, 0.85); }
+    /* ---- BREADCRUMB ---- */
+    .crumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+    .crumb a { color: var(--text-secondary); text-decoration: none; }
+    .crumb a:hover { color: var(--text-primary); }
+    .crumb .sep { color: var(--text-muted); }
 
-  
-    /* Brand wordmark — matches the live navbar: JetBrains Mono with
-       ASTER bold/primary + SCAN regular/muted/opacity-70 + tracking-widest. */
-    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; }
-    .wordmark .aster { font-weight: 700; color: #F4D5B1; }
-    .wordmark .scan  { font-weight: 400; color: #B9B5B0; opacity: 0.7; }
+    /* ---- PAGINATION ---- */
+    .pag { display: inline-flex; gap: 6px; align-items: center; }
+    .pag button { background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .pag button:hover { background: var(--surface-raised); color: var(--text-primary); }
+    .pag button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .pag .info { font-size: 13px; color: var(--text-muted); padding: 0 8px; }
 
+    /* ---- ACCORDION ---- */
+    details.acc { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 0; }
+    details.acc summary { padding: 14px 16px; cursor: pointer; font-weight: 500; font-size: 14px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    details.acc summary::after { content: "▾"; color: var(--text-muted); transition: transform 150ms; }
+    details.acc[open] summary::after { transform: rotate(180deg); }
+    details.acc .acc-body { padding: 0 16px 14px; font-size: 13px; color: var(--text-secondary); border-top: 1px solid var(--border); padding-top: 14px; }
+
+    /* ---- LONG/SHORT BAR ---- */
+    .lsbar { width: 280px; height: 8px; border-radius: 4px; overflow: hidden; display: flex; }
+    .lsbar .l { background: var(--success); }
+    .lsbar .s { background: var(--danger); }
+    .ls-legend { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); width: 280px; margin-top: 4px; }
+
+    /* ---- LOGO LOCKUP ---- */
+    .lockup { display: inline-flex; align-items: center; gap: 10px; }
+    .lockup .lk-mark { width: 32px; height: 32px; }
+    .lockup .lk-mark img { width: 100%; height: 100%; }
+    .wordmark { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: inline-flex; align-items: baseline; gap: 1px; font-size: 18px; }
+    .wordmark .aster { font-weight: 700; color: var(--primary); }
+    .wordmark .scan  { font-weight: 400; color: var(--text-secondary); opacity: 0.7; }
+
+    /* ---- META FOOTER LINE ---- */
+    .src-line { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+    .src-line code { color: var(--primary); }
   </style>
 </head>
 <body>
 
-<div class="head">
-  <h1>AsterScan — UI Components Gallery</h1>
-  <p>All atoms a video designer can drop into a scene. Screenshot, copy SVG/CSS, or right-click → save as PNG. v 2026-05-07</p>
-</div>
-
-<h2>Buttons</h2>
-<div class="specimen">
-  <div class="row">
-    <span class="lbl">primary</span>
-    <button class="btn btn-primary">Open scanner</button>
-    <button class="btn btn-primary-hover">Open scanner · hover</button>
-    <button class="btn btn-primary btn-sm">Sm</button>
-    <button class="btn btn-primary btn-lg">Large size</button>
-  </div>
-  <div class="row">
-    <span class="lbl">secondary</span>
-    <button class="btn btn-secondary">Verify with ZK</button>
-    <button class="btn btn-secondary-hover">Verify · hover</button>
-    <button class="btn btn-secondary btn-sm">Sm</button>
-  </div>
-  <div class="row">
-    <span class="lbl">ghost</span>
-    <button class="btn btn-ghost">Cancel</button>
-    <button class="btn btn-ghost-hover">Cancel · hover</button>
-    <button class="btn btn-disabled">Disabled</button>
-  </div>
-  <div class="row">
-    <span class="lbl">semantic</span>
-    <button class="btn btn-success">Sync to AsterScan</button>
-    <button class="btn btn-danger">Unfollow</button>
+<div class="page-head">
+  <div class="mark">✱</div>
+  <div>
+    <h1>Components</h1>
+    <p>src/components/shared/ · DS v1.0</p>
   </div>
 </div>
 
-<h2>Badges &amp; status pills</h2>
-<div class="specimen">
+<!-- ─── BUTTONS ─── -->
+<section id="buttons">
+  <div class="sec-head">
+    <h2>Button</h2>
+    <span class="src">source · <code>src/components/shared/Button.tsx</code></span>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">Variants — primary / sec-yellow / sec-grey / third / fourth / text / text-link / buy / sell</span>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <button class="btn btn-regular btn-primary">Primary</button>
+      <button class="btn btn-regular btn-sec-yellow">Sec yellow</button>
+      <button class="btn btn-regular btn-sec-grey">Sec grey</button>
+      <button class="btn btn-regular btn-third">Third</button>
+      <button class="btn btn-regular btn-fourth">Fourth</button>
+      <button class="btn btn-regular btn-text">Text</button>
+      <button class="btn btn-regular btn-text-link">Text link</button>
+      <button class="btn btn-regular btn-buy">Buy</button>
+      <button class="btn btn-regular btn-sell">Sell</button>
+    </div>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">Sizes — huge 56 / large 48 / middle 40 / regular 36 / small 32 / tiny 24</span>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <button class="btn btn-huge btn-primary">Huge</button>
+      <button class="btn btn-large btn-primary">Large</button>
+      <button class="btn btn-middle btn-primary">Middle</button>
+      <button class="btn btn-regular btn-primary">Regular</button>
+      <button class="btn btn-small btn-primary">Small</button>
+      <button class="btn btn-tiny btn-primary">Tiny</button>
+    </div>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">States — default / hover / loading / disabled</span>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <button class="btn btn-regular btn-primary">Default</button>
+      <button class="btn btn-regular btn-primary" style="background:var(--surface-overlay)">Hover</button>
+      <button class="btn btn-regular btn-primary" disabled style="cursor:wait;opacity:0.7"><span class="skel" style="width:12px;height:12px;border-radius:50%;display:inline-block"></span> Loading…</button>
+      <button class="btn btn-regular btn-primary" disabled>Disabled</button>
+    </div>
+    <div class="src-line">Props: <code>variant</code>, <code>size</code>, <code>loading</code>, <code>inactive</code>, <code>iconLeft</code>, <code>iconRight</code></div>
+  </div>
+</section>
+
+<!-- ─── BADGES ─── -->
+<section id="badges">
+  <div class="sec-head">
+    <h2>Badge</h2>
+    <span class="src">source · <code>src/components/shared/Badge.tsx</code></span>
+  </div>
   <div class="row">
-    <span class="lbl">severity</span>
-    <span class="badge badge-primary">Primary</span>
-    <span class="badge badge-success">Long</span>
-    <span class="badge badge-danger">Short</span>
-    <span class="badge badge-warning">Cliff</span>
-    <span class="badge badge-info">Info</span>
-    <span class="badge badge-beta">Beta</span>
+    <span class="badge badge-primary">primary</span>
+    <span class="badge badge-success">success</span>
+    <span class="badge badge-danger">error</span>
+    <span class="badge badge-warning">warning</span>
+    <span class="badge badge-info">info</span>
+    <span class="badge badge-muted">default</span>
+  </div>
+  <div class="src-line">Props: <code>variant: "success" | "error" | "warning" | "info" | "default" | "primary"</code></div>
+</section>
+
+<!-- ─── INPUTS ─── -->
+<section id="inputs">
+  <div class="sec-head">
+    <h2>Form controls</h2>
+    <span class="src">source · <code>src/components/shared/FormControls.tsx</code></span>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">Text input — default / focus / error / disabled</span>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;">
+      <div class="input-group">
+        <span class="input-label">Address</span>
+        <input class="input" placeholder="0x…" />
+      </div>
+      <div class="input-group">
+        <span class="input-label">Amount</span>
+        <input class="input" value="0.5" style="border-color:var(--primary)" />
+        <span class="input-help">in ASTER</span>
+      </div>
+      <div class="input-group">
+        <span class="input-label">From block</span>
+        <input class="input" value="invalid-block" style="border-color:var(--danger)" />
+        <span class="input-error">Block must be a positive integer</span>
+      </div>
+      <div class="input-group">
+        <span class="input-label">Validator</span>
+        <input class="input" value="—" disabled style="opacity:0.5" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">Select / Textarea</span>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;">
+      <select class="select"><option>BTCUSDT</option><option>ETHUSDT</option><option>ASTERUSDT</option></select>
+      <textarea class="textarea" placeholder="Notes — optional…">Position notes — short scalp on BTC.</textarea>
+    </div>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">Checkbox · Radio · Switch — sizes large 20 / middle 16 / small 12</span>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;">
+      <label class="checkbox on"><span class="checkbox-box"></span><span>Checked</span></label>
+      <label class="checkbox"><span class="checkbox-box"></span><span>Unchecked</span></label>
+      <label class="checkbox indeterminate"><span class="checkbox-box"></span><span>Indeterminate</span></label>
+      <span class="switch on" role="switch" aria-checked="true"></span>
+      <span class="switch" role="switch" aria-checked="false"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CARD ─── -->
+<section id="cards">
+  <div class="sec-head">
+    <h2>Card</h2>
+    <span class="src">global utility · <code>.card</code> in <code>src/app/globals.css</code></span>
+  </div>
+  <div class="grid grid-3">
+    <div class="card-demo">
+      <h4>Standard card</h4>
+      <p>Surface + border + radius 14. Use for any panel content.</p>
+    </div>
+    <div class="card-demo" style="border-color:var(--primary)">
+      <h4>Highlighted</h4>
+      <p>Border tinted in <code>--primary</code> for active or featured state.</p>
+    </div>
+    <div class="card-demo" style="background:var(--surface-overlay)">
+      <h4>Raised</h4>
+      <p>Surface-overlay background — used for nested tiles inside another card.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATCARD ─── -->
+<section id="stat-card">
+  <div class="sec-head">
+    <h2>StatCard</h2>
+    <span class="src">source · <code>src/components/shared/StatCard.tsx</code></span>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">variant=card · tones default / success / danger / muted / primary / auto</span>
+    <div class="grid grid-3">
+      <div class="stat"><div class="lbl">Total Volume <span class="help">?</span></div><div class="val">$ 397,082,832</div><div class="sub">last 24h</div></div>
+      <div class="stat"><div class="lbl">PnL · auto</div><div class="val success">+$90,596.11</div><div class="sub">+12.4% vs cost basis</div></div>
+      <div class="stat"><div class="lbl">PnL · auto</div><div class="val danger">-$36,639.80</div><div class="sub">-4.1% vs cost basis</div></div>
+      <div class="stat highlight"><div class="lbl">Active stake</div><div class="val primary">8,420,150 ASTER</div><div class="sub">5 validators</div></div>
+      <div class="stat"><div class="lbl">No data</div><div class="val muted">—</div><div class="sub">never traded</div></div>
+      <div class="stat"><div class="lbl">Trades</div><div class="val">125,842</div><div class="sub">since genesis</div></div>
+    </div>
+  </div>
+
+  <div class="row col">
+    <span class="row-label">variant=compact · variant=ghost</span>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <div class="stat compact"><div class="lbl">Block height</div><div class="val">2,485,022</div></div>
+      <div class="stat compact"><div class="lbl">Mempool</div><div class="val">12 tx</div></div>
+      <div class="stat ghost"><div class="lbl">Latency</div><div class="val">8 ms</div></div>
+      <div class="stat ghost"><div class="lbl">Avg block time</div><div class="val">1.02 s</div></div>
+    </div>
+  </div>
+
+  <div class="src-line">Props: <code>label</code>, <code>value</code>, <code>sub</code>, <code>tooltip</code>, <code>chart</code>, <code>highlight</code>, <code>tone</code>, <code>variant</code></div>
+</section>
+
+<!-- ─── TABS ─── -->
+<section id="tabs">
+  <div class="sec-head">
+    <h2>Tabs</h2>
+    <span class="src">source · <code>src/components/shared/Tabs.tsx</code></span>
+  </div>
+  <div class="row col">
+    <span class="row-label">Sizes small (14px) / tiny (12px)</span>
+    <div class="tabs"><button class="active">Overview</button><button>Trades</button><button>Liquidations</button><button disabled>Whales</button></div>
+    <div style="height:8px"></div>
+    <div class="tabs tiny"><button class="active">24h</button><button>7d</button><button>30d</button><button>All</button></div>
+  </div>
+</section>
+
+<!-- ─── DATA AGE PILLS ─── -->
+<section id="pills">
+  <div class="sec-head">
+    <h2>Data-age pills</h2>
+    <span class="src">source · <code>src/components/shared/DataAge.tsx</code> + <code>DataFlowIndicator.tsx</code></span>
   </div>
   <div class="row">
-    <span class="lbl">live state</span>
-    <span class="badge-live">live</span>
-    <span class="age age-live">live</span>
-    <span class="age age-fresh">3m ago</span>
-    <span class="age age-recent">14m ago</span>
-    <span class="age age-stale">2h ago</span>
-    <span class="age age-down">stale 6h ago</span>
+    <span class="pill dot">Live · &lt; 5s</span>
+    <span class="pill dot stale">Stale · 2 min ago</span>
+    <span class="pill dot dead">Offline</span>
+    <span class="pill">5-min snapshot</span>
+    <span class="pill">Block #2,485,022</span>
   </div>
-</div>
+</section>
 
-<h2>Cards</h2>
-<div class="specimen">
-  <div class="row" style="align-items: stretch;">
-    <div class="card" style="flex: 1; min-width: 240px;">
-      <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Default card</h3>
-      <p style="font-size: 13px; color: #B9B5B0; line-height: 1.55;">Body content lives here. Tight padding, subtle border, deep surface.</p>
-    </div>
-    <div class="card-raised" style="flex: 1; min-width: 240px;">
-      <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Raised card</h3>
-      <p style="font-size: 13px; color: #B9B5B0; line-height: 1.55;">Slightly lighter surface + drop shadow for elevated cards (modals, alpha section heroes).</p>
-    </div>
-    <div style="flex: 1; min-width: 240px; background: #161618; border: 1px solid #26262A; border-radius: 14px; overflow: hidden;">
-      <div class="card-header"><h3>With header</h3><span class="meta">12 entries</span></div>
-      <div class="card-body" style="font-size: 13px; color: #B9B5B0;">Body content under the divider.</div>
-    </div>
+<!-- ─── TABLE ROW ─── -->
+<section id="table">
+  <div class="sec-head">
+    <h2>Table row</h2>
+    <span class="src">global utility · <code>.tbl</code> + page-level wrappers</span>
   </div>
-</div>
-
-<h2>Stat cards (the big numbers)</h2>
-<div class="specimen">
-  <div class="row" style="align-items: stretch; gap: 14px;">
-    <div class="stat stat-primary">
-      <div class="stat-label">Whale orders · 24h</div>
-      <div class="stat-value">125,842</div>
-      <div class="stat-sub">last 24h · exact</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Total notional</div>
-      <div class="stat-value">$397M</div>
-      <div class="stat-sub">aggregated</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Unique traders</div>
-      <div class="stat-value">69</div>
-      <div class="stat-sub">in 50k-order sample</div>
-    </div>
-    <div class="stat stat-success">
-      <div class="stat-label">Realized PnL</div>
-      <div class="stat-value">+$90,596</div>
-      <div class="stat-sub">today</div>
-    </div>
-    <div class="stat stat-danger">
-      <div class="stat-label">Drawdown</div>
-      <div class="stat-value">-$36,640</div>
-      <div class="stat-sub">vs entry</div>
-    </div>
-  </div>
-</div>
-
-<h2>Long / Short flow bar</h2>
-<div class="specimen">
-  <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px;">
-    <span style="color: #22C55E; font-weight: 600;">LONG 90.4 %</span>
-    <span style="color: #EF4444; font-weight: 600;">SHORT 9.6 %</span>
-  </div>
-  <div class="bar-wrap">
-    <div class="bar-l" style="width: 90.4%;"></div>
-    <div class="bar-s" style="width: 9.6%;"></div>
-  </div>
-  <p style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; margin-top: 8px;">$44.8M long · $4.7M short</p>
-</div>
-
-<h2>Table row · with hover state</h2>
-<div class="specimen" style="padding: 0; overflow: hidden;">
-  <table class="demo">
-    <thead>
-      <tr>
-        <th>Pair</th>
-        <th>Side</th>
-        <th class="num">Entry</th>
-        <th class="num">Mark</th>
-        <th class="num">Notional</th>
-        <th class="num">PnL</th>
-      </tr>
-    </thead>
+  <table class="tbl">
+    <thead><tr><th>Address</th><th>Pair</th><th>Side</th><th>Size</th><th>PnL</th></tr></thead>
     <tbody>
-      <tr>
-        <td>BTCUSDT</td>
-        <td><span class="badge badge-success">LONG</span></td>
-        <td class="num">80,325.07</td>
-        <td class="num">81,038.42</td>
-        <td class="num">$10.3M</td>
-        <td class="num gain">+$90,596</td>
-      </tr>
-      <tr class="hover">
-        <td>ETHUSDT</td>
-        <td><span class="badge badge-success">LONG</span></td>
-        <td class="num">2,368.81</td>
-        <td class="num">2,383.27</td>
-        <td class="num">$9.5M</td>
-        <td class="num gain">+$57,742</td>
-      </tr>
-      <tr>
-        <td>XRPUSDT</td>
-        <td><span class="badge badge-danger">SHORT</span></td>
-        <td class="num">1.4009</td>
-        <td class="num">1.4076</td>
-        <td class="num">$1.7M</td>
-        <td class="num loss">-$8,104</td>
-      </tr>
+      <tr><td>0x02ff…c93B</td><td>BTCUSDT</td><td><span class="badge badge-success">long</span></td><td>$ 1.2M</td><td style="color:var(--success)">+$ 90,596</td></tr>
+      <tr><td>0x91Ab…44e1</td><td>ETHUSDT</td><td><span class="badge badge-danger">short</span></td><td>$ 480K</td><td style="color:var(--danger)">-$ 36,639</td></tr>
+      <tr><td>0x7C2D…aa07</td><td>ASTERUSDT</td><td><span class="badge badge-success">long</span></td><td>$ 75K</td><td style="color:var(--success)">+$ 4,210</td></tr>
     </tbody>
   </table>
-</div>
+</section>
 
-<h2>Logo lockups</h2>
-<div class="specimen">
-  <div class="row" style="gap: 32px;">
-    <img src="/logos/asterscan-logo-compact.svg" style="height: 40px;" alt="" />
-    <span style="font-size: 16px; font-weight: 600; color: #B9B5B0;">+</span>
-    <img src="/logos/asterscan-icon-mark.svg" style="height: 40px;" alt="" />
-    <span style="font-size: 16px; font-weight: 600; color: #B9B5B0;">+</span>
-    <div style="background: #FFFFFF; padding: 14px 20px; border-radius: 8px;">
-      <img src="/logos/asterscan-logo-compact.svg" style="height: 30px;" alt="" />
+<!-- ─── LONG/SHORT BAR ─── -->
+<section id="lsbar">
+  <div class="sec-head">
+    <h2>Long / Short bar</h2>
+    <span class="src">inline atom — see usage in <code>src/components/positions/</code></span>
+  </div>
+  <div class="row col">
+    <div class="lsbar"><div class="l" style="flex:62"></div><div class="s" style="flex:38"></div></div>
+    <div class="ls-legend"><span style="color:var(--success)">62% long</span><span style="color:var(--danger)">38% short</span></div>
+  </div>
+</section>
+
+<!-- ─── TOAST ─── -->
+<section id="toast">
+  <div class="sec-head">
+    <h2>Notification / Toast</h2>
+    <span class="src">source · <code>src/components/shared/Notification.tsx</code> + <code>Toast.tsx</code></span>
+  </div>
+  <div class="row" style="flex-wrap:wrap;align-items:flex-start;">
+    <div class="toast success"><span class="ico">✓</span><div><div class="title">Bookmark saved</div><div class="body">Whale 0x02ff…c93B added to your watchlist.</div></div></div>
+    <div class="toast danger"><span class="ico">✕</span><div><div class="title">Request failed</div><div class="body">Could not load liquidations — retry in 5s.</div></div></div>
+    <div class="toast warning"><span class="ico">!</span><div><div class="title">Stale data</div><div class="body">Snapshot is 2 minutes old.</div></div></div>
+    <div class="toast"><span class="ico">i</span><div><div class="title">New block</div><div class="body">Height 2,485,022 · 8 tx · 1.02s.</div></div></div>
+  </div>
+</section>
+
+<!-- ─── TOOLTIP ─── -->
+<section id="tooltip">
+  <div class="sec-head">
+    <h2>Tooltip</h2>
+    <span class="src">source · <code>src/components/shared/Tooltip.tsx</code></span>
+  </div>
+  <div class="row" style="padding-top:60px;">
+    <span class="tip"><span class="pop">Median across 14 oracles</span><span class="badge badge-muted">Hover me</span></span>
+    <span class="tip"><span class="pop">5-min snapshot — refreshed at :05/:10/:15…</span><span class="badge badge-info">snapshot info</span></span>
+  </div>
+</section>
+
+<!-- ─── ADDRESS / HASH ─── -->
+<section id="address">
+  <div class="sec-head">
+    <h2>Address · Hash · Copy</h2>
+    <span class="src">source · <code>AddressLink.tsx</code> · <code>HashLink.tsx</code> · <code>CopyButton.tsx</code></span>
+  </div>
+  <div class="row col">
+    <div class="addr"><a href="#">0x02fFC99ED8867340e2755D6ABd7f9F8FDc95c93B</a><button class="copy" title="Copy">⧉</button></div>
+    <div class="addr"><a href="#">0xa3f1…b27d</a> <span class="badge badge-muted">whale</span><button class="copy" title="Copy">⧉</button></div>
+    <div class="addr"><a href="#">0x9c0c8e…0aa07</a> <span class="badge badge-warning">flagged</span><button class="copy" title="Copy">⧉</button></div>
+  </div>
+</section>
+
+<!-- ─── BREADCRUMB ─── -->
+<section id="breadcrumb">
+  <div class="sec-head">
+    <h2>Breadcrumb</h2>
+    <span class="src">source · <code>src/components/shared/Breadcrumb.tsx</code></span>
+  </div>
+  <div class="row">
+    <nav class="crumb"><a href="#">Home</a><span class="sep">/</span><a href="#">Validators</a><span class="sep">/</span><span>Trust Wallet</span></nav>
+  </div>
+</section>
+
+<!-- ─── PAGINATION ─── -->
+<section id="pagination">
+  <div class="sec-head">
+    <h2>Pagination</h2>
+    <span class="src">source · <code>src/components/shared/Pagination.tsx</code></span>
+  </div>
+  <div class="row">
+    <div class="pag">
+      <button disabled>First</button>
+      <button disabled>‹</button>
+      <span class="info">Page 1 of 42</span>
+      <button>›</button>
+      <button>Last</button>
     </div>
   </div>
-</div>
+</section>
 
-<p style="margin-top: 60px; padding-top: 24px; border-top: 1px solid #26262A; font-size: 12px; color: #7A7770;">
-  © Kairos Lab · AsterScan UI components · Drop into After Effects, Figma, Photoshop. <a href="/press" style="color: #F4D5B1;">All UI assets →</a>
-</p>
+<!-- ─── ACCORDION ─── -->
+<section id="accordion">
+  <div class="sec-head">
+    <h2>Accordion</h2>
+    <span class="src">source · <code>src/components/shared/Accordion.tsx</code></span>
+  </div>
+  <div class="row col">
+    <details class="acc" open>
+      <summary>What is the Aster Chain privacy mode?</summary>
+      <div class="acc-body">When privacy is on, balances and positions are hidden by default. Each order is encrypted and verifiable via ZK cryptography. Selective disclosure is possible via Viewer Pass.</div>
+    </details>
+    <details class="acc">
+      <summary>How is the oracle price computed?</summary>
+      <div class="acc-body">Median across 14 exchanges, weighted per validator by stake.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ─── KEYBOARD ─── -->
+<section id="keyboard">
+  <div class="sec-head">
+    <h2>Keyboard shortcuts</h2>
+    <span class="src">source · <code>src/components/shared/KeyboardShortcuts.tsx</code></span>
+  </div>
+  <div class="row" style="gap:24px;flex-wrap:wrap;">
+    <span><kbd>⌘</kbd>+<kbd>K</kbd> Open command bar</span>
+    <span><kbd>G</kbd> then <kbd>W</kbd> Go to whales</span>
+    <span><kbd>?</kbd> Show all shortcuts</span>
+    <span><kbd>Esc</kbd> Close modal</span>
+  </div>
+</section>
+
+<!-- ─── SKELETON ─── -->
+<section id="skeleton">
+  <div class="sec-head">
+    <h2>Skeleton / loading</h2>
+    <span class="src">source · <code>src/components/shared/Skeleton.tsx</code> + <code>PageSkeleton.tsx</code></span>
+  </div>
+  <div class="row col" style="gap:10px;">
+    <div class="skel" style="width:200px;height:14px"></div>
+    <div class="skel" style="width:340px;height:14px"></div>
+    <div class="skel" style="width:140px;height:14px"></div>
+    <div class="skel" style="width:100%;height:60px;margin-top:4px"></div>
+  </div>
+</section>
+
+<!-- ─── EMPTY STATE ─── -->
+<section id="empty">
+  <div class="sec-head">
+    <h2>Empty state</h2>
+    <span class="src">source · <code>src/components/shared/EmptyState.tsx</code></span>
+  </div>
+  <div class="row" style="justify-content:center;padding:48px;">
+    <div style="text-align:center;">
+      <div style="font-size:32px;opacity:0.4;margin-bottom:8px;">⊘</div>
+      <div style="font-weight:600;font-size:14px;">No positions yet</div>
+      <div style="color:var(--text-muted);font-size:12px;margin-top:4px;max-width:280px;">This wallet has not opened any perp position on Aster Chain since the genesis block.</div>
+      <button class="btn btn-small btn-text" style="margin-top:10px;">Bookmark to track →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LOGO LOCKUP ─── -->
+<section id="lockup">
+  <div class="sec-head">
+    <h2>Logo lockup</h2>
+    <span class="src">source · <code>src/components/layout/Navbar.tsx</code></span>
+  </div>
+  <div class="row" style="gap:24px;">
+    <span class="lockup">
+      <span class="lk-mark"><img src="/logos/asterscan-icon-mark.svg" alt="" /></span>
+      <span class="wordmark"><span class="aster">ASTER</span><span class="scan">SCAN</span></span>
+    </span>
+    <span class="lockup" style="opacity:0.7;">
+      <span class="wordmark" style="font-size:14px"><span class="aster">ASTER</span><span class="scan">SCAN</span></span>
+    </span>
+    <span class="lockup">
+      <span class="wordmark" style="font-size:24px"><span class="aster">ASTER</span><span class="scan">SCAN</span></span>
+    </span>
+  </div>
+  <div class="src-line">JetBrains Mono · ASTER 700 / <code>--primary</code> · SCAN 400 / <code>--text-secondary</code> @ opacity 0.7 · letter-spacing 0.1em</div>
+</section>
 
 </body>
 </html>
