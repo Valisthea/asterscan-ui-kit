@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>AsterScan — UI Components Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Self-contained — single-page gallery of UI atoms.
+       Open in browser → designer can screenshot any component +
+       drop directly into After Effects / Figma / Photoshop. */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0E0E0F; color: #F2F0EE; font-family: 'DM Sans', system-ui, sans-serif; padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+    .head { padding-bottom: 22px; border-bottom: 1px solid #26262A; margin-bottom: 36px; }
+    .head h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+    .head p  { font-size: 13px; color: #7A7770; margin-top: 4px; }
+    h2 { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #B9B5B0; margin: 36px 0 14px; }
+    .specimen { background: #161618; border: 1px solid #26262A; border-radius: 14px; padding: 28px; margin-bottom: 16px; }
+    .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .row + .row { margin-top: 16px; }
+    .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; text-transform: uppercase; letter-spacing: 0.16em; min-width: 90px; }
+
+    /* ── BUTTONS ─────────────────────────────────────────── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: default; border: 1px solid transparent; transition: all 150ms; line-height: 1; }
+    .btn-primary { background: #F4D5B1; color: #0E0E0F; }
+    .btn-primary-hover { background: #FFD29F; color: #0E0E0F; }
+    .btn-secondary { background: rgba(244, 213, 177, 0.10); color: #F4D5B1; border-color: rgba(244, 213, 177, 0.30); }
+    .btn-secondary-hover { background: rgba(244, 213, 177, 0.20); color: #F4D5B1; border-color: rgba(244, 213, 177, 0.30); }
+    .btn-ghost { background: transparent; color: #B9B5B0; border-color: #26262A; }
+    .btn-ghost-hover { background: #1C1C1F; color: #F2F0EE; border-color: #3A3A3F; }
+    .btn-danger { background: rgba(239, 68, 68, 0.10); color: #EF4444; border-color: rgba(239, 68, 68, 0.30); }
+    .btn-success { background: rgba(34, 197, 94, 0.10); color: #22C55E; border-color: rgba(34, 197, 94, 0.30); }
+    .btn-disabled { background: #1C1C1F; color: #7A7770; border-color: #26262A; cursor: not-allowed; }
+    .btn-sm { padding: 7px 12px; font-size: 11px; }
+    .btn-lg { padding: 12px 22px; font-size: 14px; }
+
+    /* ── BADGES ──────────────────────────────────────────── */
+    .badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.4; }
+    .badge-primary { background: rgba(244, 213, 177, 0.15); color: #F4D5B1; border: 1px solid rgba(244, 213, 177, 0.30); }
+    .badge-success { background: rgba(34, 197, 94, 0.15); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.30); }
+    .badge-danger  { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.30); }
+    .badge-warning { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.30); }
+    .badge-info    { background: rgba(59, 130, 246, 0.15); color: #3B82F6; border: 1px solid rgba(59, 130, 246, 0.30); }
+    .badge-beta    { background: rgba(244, 213, 177, 0.15); color: #F4D5B1; letter-spacing: 0.18em; }
+    .badge-live { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; background: rgba(34, 197, 94, 0.15); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.30); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; }
+    .badge-live::before { content:''; width: 6px; height: 6px; background: #22C55E; border-radius: 9999px; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.4); }
+
+    /* ── CARDS ──────────────────────────────────────────── */
+    .card { background: #161618; border: 1px solid #26262A; border-radius: 14px; padding: 22px; }
+    .card-raised { background: #1C1C1F; border: 1px solid #26262A; border-radius: 14px; padding: 22px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .card-header { padding: 14px 22px; border-bottom: 1px solid #26262A; display: flex; align-items: center; justify-content: space-between; }
+    .card-header h3 { font-size: 14px; font-weight: 600; }
+    .card-header .meta { font-size: 10px; color: #7A7770; text-transform: uppercase; letter-spacing: 0.16em; }
+    .card-body { padding: 22px; }
+
+    /* ── STAT CARDS ─────────────────────────────────────── */
+    .stat { background: #161618; border: 1px solid #26262A; border-radius: 14px; padding: 22px; min-width: 200px; }
+    .stat .stat-label { font-size: 10px; color: #7A7770; text-transform: uppercase; letter-spacing: 0.16em; }
+    .stat .stat-value { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; color: #F2F0EE; margin-top: 6px; letter-spacing: -0.01em; }
+    .stat .stat-sub { font-size: 11px; color: #7A7770; margin-top: 6px; }
+    .stat-success .stat-value { color: #22C55E; }
+    .stat-danger  .stat-value { color: #EF4444; }
+    .stat-primary .stat-value {
+      background: linear-gradient(120deg, #F4D5B1, #FFD29F);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ── DATA AGE PILLS ─────────────────────────────────── */
+    .age { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 9999px; border: 1px solid; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; }
+    .age::before { content:''; width: 6px; height: 6px; border-radius: 9999px; background: var(--c); }
+    .age-live    { color: #22C55E; border-color: rgba(34, 197, 94, 0.30); --c: #22C55E; }
+    .age-fresh   { color: #22C55E; border-color: rgba(34, 197, 94, 0.25); --c: #22C55E; opacity: 0.85; }
+    .age-recent  { color: #B9B5B0; border-color: #26262A; --c: #7A7770; }
+    .age-stale   { color: #F59E0B; border-color: rgba(245, 158, 11, 0.30); --c: #F59E0B; }
+    .age-down    { color: #EF4444; border-color: rgba(239, 68, 68, 0.30); --c: #EF4444; }
+
+    /* ── TABLE ROWS ─────────────────────────────────────── */
+    table.demo { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.demo thead { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: #7A7770; }
+    table.demo th, table.demo td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #26262A; }
+    table.demo td.num { font-family: 'JetBrains Mono', monospace; text-align: right; }
+    table.demo tr.hover td { background: rgba(244, 213, 177, 0.05); border-left: 2px solid #F4D5B1; }
+    table.demo tr.hover td:first-child { padding-left: 12px; }
+    .gain { color: #22C55E; }
+    .loss { color: #EF4444; }
+
+    /* ── BARS / PROGRESS ────────────────────────────────── */
+    .bar-wrap { display: flex; height: 14px; border-radius: 4px; background: #1C1C1F; overflow: hidden; }
+    .bar-l { background: #22C55E; }
+    .bar-s { background: #EF4444; }
+    .bar-cliff { background: rgba(245, 158, 11, 0.85); }
+
+  </style>
+</head>
+<body>
+
+<div class="head">
+  <h1>AsterScan — UI Components Gallery</h1>
+  <p>All atoms a video designer can drop into a scene. Screenshot, copy SVG/CSS, or right-click → save as PNG. v 2026-05-07</p>
+</div>
+
+<h2>Buttons</h2>
+<div class="specimen">
+  <div class="row">
+    <span class="lbl">primary</span>
+    <button class="btn btn-primary">Open scanner</button>
+    <button class="btn btn-primary-hover">Open scanner · hover</button>
+    <button class="btn btn-primary btn-sm">Sm</button>
+    <button class="btn btn-primary btn-lg">Large size</button>
+  </div>
+  <div class="row">
+    <span class="lbl">secondary</span>
+    <button class="btn btn-secondary">Verify with ZK</button>
+    <button class="btn btn-secondary-hover">Verify · hover</button>
+    <button class="btn btn-secondary btn-sm">Sm</button>
+  </div>
+  <div class="row">
+    <span class="lbl">ghost</span>
+    <button class="btn btn-ghost">Cancel</button>
+    <button class="btn btn-ghost-hover">Cancel · hover</button>
+    <button class="btn btn-disabled">Disabled</button>
+  </div>
+  <div class="row">
+    <span class="lbl">semantic</span>
+    <button class="btn btn-success">Sync to AsterScan</button>
+    <button class="btn btn-danger">Unfollow</button>
+  </div>
+</div>
+
+<h2>Badges &amp; status pills</h2>
+<div class="specimen">
+  <div class="row">
+    <span class="lbl">severity</span>
+    <span class="badge badge-primary">Primary</span>
+    <span class="badge badge-success">Long</span>
+    <span class="badge badge-danger">Short</span>
+    <span class="badge badge-warning">Cliff</span>
+    <span class="badge badge-info">Info</span>
+    <span class="badge badge-beta">Beta</span>
+  </div>
+  <div class="row">
+    <span class="lbl">live state</span>
+    <span class="badge-live">live</span>
+    <span class="age age-live">live</span>
+    <span class="age age-fresh">3m ago</span>
+    <span class="age age-recent">14m ago</span>
+    <span class="age age-stale">2h ago</span>
+    <span class="age age-down">stale 6h ago</span>
+  </div>
+</div>
+
+<h2>Cards</h2>
+<div class="specimen">
+  <div class="row" style="align-items: stretch;">
+    <div class="card" style="flex: 1; min-width: 240px;">
+      <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Default card</h3>
+      <p style="font-size: 13px; color: #B9B5B0; line-height: 1.55;">Body content lives here. Tight padding, subtle border, deep surface.</p>
+    </div>
+    <div class="card-raised" style="flex: 1; min-width: 240px;">
+      <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Raised card</h3>
+      <p style="font-size: 13px; color: #B9B5B0; line-height: 1.55;">Slightly lighter surface + drop shadow for elevated cards (modals, alpha section heroes).</p>
+    </div>
+    <div style="flex: 1; min-width: 240px; background: #161618; border: 1px solid #26262A; border-radius: 14px; overflow: hidden;">
+      <div class="card-header"><h3>With header</h3><span class="meta">12 entries</span></div>
+      <div class="card-body" style="font-size: 13px; color: #B9B5B0;">Body content under the divider.</div>
+    </div>
+  </div>
+</div>
+
+<h2>Stat cards (the big numbers)</h2>
+<div class="specimen">
+  <div class="row" style="align-items: stretch; gap: 14px;">
+    <div class="stat stat-primary">
+      <div class="stat-label">Whale orders · 24h</div>
+      <div class="stat-value">125,842</div>
+      <div class="stat-sub">last 24h · exact</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Total notional</div>
+      <div class="stat-value">$397M</div>
+      <div class="stat-sub">aggregated</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Unique traders</div>
+      <div class="stat-value">69</div>
+      <div class="stat-sub">in 50k-order sample</div>
+    </div>
+    <div class="stat stat-success">
+      <div class="stat-label">Realized PnL</div>
+      <div class="stat-value">+$90,596</div>
+      <div class="stat-sub">today</div>
+    </div>
+    <div class="stat stat-danger">
+      <div class="stat-label">Drawdown</div>
+      <div class="stat-value">-$36,640</div>
+      <div class="stat-sub">vs entry</div>
+    </div>
+  </div>
+</div>
+
+<h2>Long / Short flow bar</h2>
+<div class="specimen">
+  <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px;">
+    <span style="color: #22C55E; font-weight: 600;">LONG 90.4 %</span>
+    <span style="color: #EF4444; font-weight: 600;">SHORT 9.6 %</span>
+  </div>
+  <div class="bar-wrap">
+    <div class="bar-l" style="width: 90.4%;"></div>
+    <div class="bar-s" style="width: 9.6%;"></div>
+  </div>
+  <p style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; margin-top: 8px;">$44.8M long · $4.7M short</p>
+</div>
+
+<h2>Table row · with hover state</h2>
+<div class="specimen" style="padding: 0; overflow: hidden;">
+  <table class="demo">
+    <thead>
+      <tr>
+        <th>Pair</th>
+        <th>Side</th>
+        <th class="num">Entry</th>
+        <th class="num">Mark</th>
+        <th class="num">Notional</th>
+        <th class="num">PnL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BTCUSDT</td>
+        <td><span class="badge badge-success">LONG</span></td>
+        <td class="num">80,325.07</td>
+        <td class="num">81,038.42</td>
+        <td class="num">$10.3M</td>
+        <td class="num gain">+$90,596</td>
+      </tr>
+      <tr class="hover">
+        <td>ETHUSDT</td>
+        <td><span class="badge badge-success">LONG</span></td>
+        <td class="num">2,368.81</td>
+        <td class="num">2,383.27</td>
+        <td class="num">$9.5M</td>
+        <td class="num gain">+$57,742</td>
+      </tr>
+      <tr>
+        <td>XRPUSDT</td>
+        <td><span class="badge badge-danger">SHORT</span></td>
+        <td class="num">1.4009</td>
+        <td class="num">1.4076</td>
+        <td class="num">$1.7M</td>
+        <td class="num loss">-$8,104</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Logo lockups</h2>
+<div class="specimen">
+  <div class="row" style="gap: 32px;">
+    <img src="/logos/asterscan-logo-compact.svg" style="height: 40px;" alt="" />
+    <span style="font-size: 16px; font-weight: 600; color: #B9B5B0;">+</span>
+    <img src="/logos/asterscan-icon-mark.svg" style="height: 40px;" alt="" />
+    <span style="font-size: 16px; font-weight: 600; color: #B9B5B0;">+</span>
+    <div style="background: #FFFFFF; padding: 14px 20px; border-radius: 8px;">
+      <img src="/logos/asterscan-logo-compact.svg" style="height: 30px;" alt="" />
+    </div>
+  </div>
+</div>
+
+<p style="margin-top: 60px; padding-top: 24px; border-top: 1px solid #26262A; font-size: 12px; color: #7A7770;">
+  © Kairos Lab · AsterScan UI components · Drop into After Effects, Figma, Photoshop. <a href="/press" style="color: #F4D5B1;">All UI assets →</a>
+</p>
+
+</body>
+</html>

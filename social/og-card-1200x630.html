@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan — OG Card 1200×630 (empty)</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Empty brand frame for the designer to fill with their own copy.
+       1200×630 — Facebook / LinkedIn / Discord OG standard. */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .og {
+      width: 1200px; height: 630px;
+      background:
+        radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.08), transparent 55%),
+        linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
+      color: #F2F0EE;
+      padding: 60px 70px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+      border-radius: 16px;
+    }
+    .og::after { content: ''; position: absolute; top: 0; right: 0; width: 320px; height: 4px; background: linear-gradient(90deg, transparent, #F4D5B1); }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand .mark { width: 56px; height: 56px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); border-radius: 14px; display: grid; place-items: center; color: #0E0E0F; font-weight: 800; font-size: 28px; }
+    .brand .name { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+    .brand .meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+
+    .placeholder-h { font-size: 64px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; color: #3A3A3F; max-width: 920px; }
+    .placeholder-s { font-size: 22px; color: #3A3A3F; margin-top: 18px; max-width: 760px; }
+
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 18px; opacity: 0.85; }
+    .by  { font-size: 12px; color: #7A7770; letter-spacing: 0.14em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="og">
+  <div class="brand">
+    <div class="mark">✱</div>
+    <div>
+      <div class="name">AsterScan</div>
+      <div class="meta">Aster Chain block explorer</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="placeholder-h">Headline placeholder</div>
+    <div class="placeholder-s">Subtitle placeholder · designer fills the actual copy.</div>
+  </div>
+
+  <div class="footer">
+    <div class="url">aster-scan.com</div>
+    <div class="by">Built by Kairos Lab</div>
+  </div>
+</div>
+
+</body>
+</html>

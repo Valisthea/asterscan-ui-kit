@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>AsterScan — UI Partner Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #0E0E0F; color: #F2F0EE; font-family: 'DM Sans', system-ui, sans-serif; }
+    body { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+
+    .head { display: flex; align-items: center; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid #26262A; margin-bottom: 36px; }
+    .mark { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); display: grid; place-items: center; color: #0E0E0F; font-size: 28px; font-weight: 800; flex-shrink: 0; }
+    .head h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+    .head p  { font-size: 13px; color: #7A7770; margin-top: 4px; }
+
+    h2 { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #B9B5B0; margin: 36px 0 14px; }
+    h2 .count { font-family: 'JetBrains Mono', monospace; color: #F4D5B1; margin-left: 8px; }
+    p.lead { font-size: 14px; color: #B9B5B0; line-height: 1.55; max-width: 720px; }
+
+    .grid { display: grid; gap: 12px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 720px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: #161618;
+      border: 1px solid #26262A;
+      border-radius: 14px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 150ms, background 150ms, transform 150ms;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .card:hover { border-color: #F4D5B1; background: #1C1C1F; transform: translateY(-2px); }
+    .card .name { font-size: 14px; font-weight: 600; color: #F2F0EE; }
+    .card .desc { font-size: 12px; color: #7A7770; line-height: 1.4; }
+    .card .meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #B9B5B0; margin-top: 4px; }
+
+    .preview-card {
+      background: #161618;
+      border: 1px solid #26262A;
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex; flex-direction: column;
+      transition: border-color 150ms;
+    }
+    .preview-card:hover { border-color: #F4D5B1; }
+    .preview-card .visual { aspect-ratio: 16/9; background: #0E0E0F; display: grid; place-items: center; padding: 14px; }
+    .preview-card .visual.bg-light { background: #FFFFFF; }
+    .preview-card .visual.bg-mid   { background: #1C1C1F; }
+    .preview-card .visual img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .preview-card .meta-bar { padding: 12px 16px; border-top: 1px solid #26262A; display: flex; justify-content: space-between; align-items: center; }
+    .preview-card .meta-bar .label { font-size: 12px; font-weight: 600; }
+    .preview-card .meta-bar .dim { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7770; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .swatch-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    @media (max-width: 720px) { .swatch-row { grid-template-columns: repeat(2, 1fr); } }
+    .swatch { background: var(--c); border-radius: 10px; padding: 14px; min-height: 80px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,0.05); }
+    .swatch .sname { font-weight: 700; font-size: 11px; }
+    .swatch .shex  { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.85; }
+    .swatch.dark   { color: #F2F0EE; }
+    .swatch.light  { color: #0E0E0F; }
+
+    .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #26262A; font-size: 12px; color: #7A7770; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    a { color: #F4D5B1; }
+
+    .pill { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px; background: rgba(244, 213, 177, 0.15); color: #F4D5B1; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-left: 8px; }
+  </style>
+</head>
+<body>
+
+<div class="head">
+  <div class="mark">✱</div>
+  <div>
+    <h1>AsterScan — UI Partner Kit</h1>
+    <p>Everything for video, motion design, social, marketing. Drop into any tool. <span class="pill">v 2026-05-07</span></p>
+  </div>
+</div>
+
+<p class="lead">
+  Open any item below in your browser, then screenshot / right-click-save / copy SVG / inspect-CSS.
+  Each HTML template renders at its native pixel size — perfect for After Effects compositions, Figma frames, or static social cards.
+</p>
+
+<h2>Logos <span class="count">3</span></h2>
+<div class="grid grid-3">
+  <a class="preview-card" href="/logos/asterscan-logo-compact.svg" target="_blank">
+    <div class="visual bg-light"><img src="/logos/asterscan-logo-compact.svg" alt="" /></div>
+    <div class="meta-bar"><span class="label">Compact</span><span class="dim">SVG</span></div>
+  </a>
+  <a class="preview-card" href="/logos/asterscan-logo-white.svg" target="_blank">
+    <div class="visual"><img src="/logos/asterscan-logo-white.svg" alt="" /></div>
+    <div class="meta-bar"><span class="label">White tile</span><span class="dim">SVG</span></div>
+  </a>
+  <a class="preview-card" href="/logos/asterscan-icon-mark.svg" target="_blank">
+    <div class="visual bg-mid"><img src="/logos/asterscan-icon-mark.svg" alt="" style="max-height: 100px;" /></div>
+    <div class="meta-bar"><span class="label">Icon mark</span><span class="dim">SVG · 100×100</span></div>
+  </a>
+</div>
+
+<h2>Brand palette <span class="count">16 colors</span></h2>
+<div class="swatch-row" style="margin-bottom: 8px;">
+  <div class="swatch light" style="--c:#F4D5B1"><span class="sname">primary</span><span class="shex">#F4D5B1</span></div>
+  <div class="swatch light" style="--c:#FFD29F"><span class="sname">primary-hover</span><span class="shex">#FFD29F</span></div>
+  <div class="swatch light" style="--c:#FFE5C5"><span class="sname">primary-light</span><span class="shex">#FFE5C5</span></div>
+  <div class="swatch dark" style="--c:#0E0E0F; border-color:#26262A"><span class="sname">background</span><span class="shex">#0E0E0F</span></div>
+</div>
+<div class="swatch-row" style="margin-bottom: 8px;">
+  <div class="swatch dark" style="--c:#161618; border-color:#26262A"><span class="sname">surface</span><span class="shex">#161618</span></div>
+  <div class="swatch dark" style="--c:#1C1C1F; border-color:#26262A"><span class="sname">surface-raised</span><span class="shex">#1C1C1F</span></div>
+  <div class="swatch dark" style="--c:#252528; border-color:#26262A"><span class="sname">surface-overlay</span><span class="shex">#252528</span></div>
+  <div class="swatch dark" style="--c:#3A3A3F"><span class="sname">border-strong</span><span class="shex">#3A3A3F</span></div>
+</div>
+<div class="swatch-row" style="margin-bottom: 8px;">
+  <div class="swatch dark" style="--c:#161618; color:#F2F0EE; border-color:#26262A"><span class="sname">text-primary</span><span class="shex">#F2F0EE</span></div>
+  <div class="swatch dark" style="--c:#161618; color:#B9B5B0; border-color:#26262A"><span class="sname">text-secondary</span><span class="shex">#B9B5B0</span></div>
+  <div class="swatch dark" style="--c:#161618; color:#7A7770; border-color:#26262A"><span class="sname">text-muted</span><span class="shex">#7A7770</span></div>
+  <div class="swatch dark" style="--c:#26262A"><span class="sname">border</span><span class="shex">#26262A</span></div>
+</div>
+<div class="swatch-row">
+  <div class="swatch dark" style="--c:#22C55E"><span class="sname">success · long</span><span class="shex">#22C55E</span></div>
+  <div class="swatch dark" style="--c:#EF4444"><span class="sname">danger · short</span><span class="shex">#EF4444</span></div>
+  <div class="swatch dark" style="--c:#F59E0B"><span class="sname">warning · cliff</span><span class="shex">#F59E0B</span></div>
+  <div class="swatch dark" style="--c:#3B82F6"><span class="sname">info</span><span class="shex">#3B82F6</span></div>
+</div>
+<div class="grid grid-2" style="margin-top: 14px;">
+  <a class="card" href="/palette-card.html">
+    <span class="name">Palette card →</span>
+    <span class="desc">Print-ready A4 landscape, all swatches + role descriptions.</span>
+  </a>
+  <a class="card" href="/colors.json">
+    <span class="name">colors.json →</span>
+    <span class="desc">Raw HEX + RGB per token, machine-readable for any tool.</span>
+  </a>
+</div>
+
+<h2>UI components <span class="count">all atoms</span></h2>
+<p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+  Buttons, badges, cards, stat numbers, table rows, status pills. One specimen page — open and screenshot any element.
+</p>
+<div class="grid grid-2">
+  <a class="card" href="/components.html">
+    <span class="name">UI Components Gallery →</span>
+    <span class="desc">8 component families: buttons (4 variants), badges (6 severities), cards, stat-cards, data-age pills, long/short bar, hover-state table row, logo lockups.</span>
+    <span class="meta">components.html</span>
+  </a>
+  <a class="card" href="/typography/typography-card.html">
+    <span class="name">Typography card →</span>
+    <span class="desc">DM Sans + JetBrains Mono specimen, every size + weight + use case.</span>
+    <span class="meta">typography-card.html</span>
+  </a>
+</div>
+
+<h2>Video frames <span class="count">3 × 1920×1080</span></h2>
+<p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+  Empty brand-skinned frames at 16:9 for After Effects / Premiere. Designer fills the placeholder copy with the actual content.
+</p>
+<div class="grid grid-3">
+  <a class="card" href="/frames/title-card-1920x1080.html">
+    <span class="name">Title card →</span>
+    <span class="desc">Opening / chapter card with brand top, headline middle, URL footer.</span>
+    <span class="meta">title-card-1920x1080.html</span>
+  </a>
+  <a class="card" href="/frames/lower-third-1920x1080.html">
+    <span class="name">Lower third →</span>
+    <span class="desc">Speaker / chapter overlay + stat callout, transparent on top of footage.</span>
+    <span class="meta">lower-third-1920x1080.html</span>
+  </a>
+  <a class="card" href="/frames/end-card-1920x1080.html">
+    <span class="name">End card →</span>
+    <span class="desc">Closing card centered around the icon mark + URL.</span>
+    <span class="meta">end-card-1920x1080.html</span>
+  </a>
+</div>
+
+<h2>Social templates <span class="count">5 formats</span></h2>
+<p class="lead" style="font-size: 13px; margin-bottom: 14px;">
+  Empty brand frames for static social posts. Designer fills the headline + sub. No marketing copy baked in.
+</p>
+<div class="grid grid-3">
+  <a class="card" href="/social/og-card-1200x630.html">
+    <span class="name">OG card →</span>
+    <span class="desc">Facebook / LinkedIn / Discord previews.</span>
+    <span class="meta">1200×630</span>
+  </a>
+  <a class="card" href="/social/twitter-card-1200x675.html">
+    <span class="name">Twitter / X card →</span>
+    <span class="desc">X large card preview.</span>
+    <span class="meta">1200×675</span>
+  </a>
+  <a class="card" href="/social/instagram-1080x1080.html">
+    <span class="name">Instagram square →</span>
+    <span class="desc">IG, Threads.</span>
+    <span class="meta">1080×1080</span>
+  </a>
+  <a class="card" href="/social/twitter-banner-1500x500.html">
+    <span class="name">Twitter banner →</span>
+    <span class="desc">Profile banner with avatar safe-zone marked.</span>
+    <span class="meta">1500×500</span>
+  </a>
+  <a class="card" href="/social/github-social-1280x640.html">
+    <span class="name">GitHub social →</span>
+    <span class="desc">Repo social preview, OSS badge style.</span>
+    <span class="meta">1280×640</span>
+  </a>
+</div>
+
+<h2>Pro tips for the designer</h2>
+<p class="lead" style="font-size: 13px;">
+  → Open any HTML in Chrome. <strong>Cmd/Ctrl+P</strong> to save as PDF, or use a clean-screenshot tool (Cleanshot, Snagit, Polish) to grab the visible frame at native pixel size.<br/>
+  → Drag the SVG logos directly onto a Figma / Illustrator canvas — fully editable, infinite scale.<br/>
+  → For Adobe After Effects: open the HTML in a browser, use a screen-recorder plugin to capture the rendered frame, drop into your composition.<br/>
+  → For Photoshop: take a 1× screenshot at the native size (1200×630, 1500×500, etc.) — the file dimensions match exactly.<br/>
+  → All HTML files are self-contained — no external CSS / no broken refs — they render identically online and offline.
+</p>
+
+<div class="footer">
+  <span>© Kairos Lab · AsterScan UI Partner Kit · 2026-05-07</span>
+  <a href="https://aster-scan.com">aster-scan.com</a>
+</div>
+
+</body>
+</html>

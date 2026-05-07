@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan — Title Card 1920×1080</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 16:9 title card. Empty placeholders — designer fills the copy. */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .frame {
+      width: 1920px; height: 1080px;
+      background:
+        radial-gradient(ellipse at top right, rgba(244, 213, 177, 0.10), transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(244, 213, 177, 0.06), transparent 50%),
+        linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
+      color: #F2F0EE;
+      padding: 100px 120px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+      border: 1px solid #26262A;
+    }
+    .frame::after {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 50%; height: 6px;
+      background: linear-gradient(90deg, transparent, #F4D5B1, #FFD29F);
+    }
+    .head { display: flex; justify-content: space-between; align-items: flex-start; }
+    .brand { display: flex; align-items: center; gap: 24px; }
+    .brand .mark {
+      width: 88px; height: 88px;
+      background: linear-gradient(135deg, #F4D5B1, #FFD29F);
+      border-radius: 22px;
+      display: grid; place-items: center;
+      color: #0E0E0F; font-weight: 800; font-size: 44px;
+      box-shadow: 0 0 100px rgba(244, 213, 177, 0.20);
+    }
+    .brand .name { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; }
+    .brand .meta { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #7A7770; letter-spacing: 0.20em; text-transform: uppercase; margin-top: 8px; }
+    .copy-tag { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; padding-top: 18px; }
+
+    /* Designer-editable headline area (placeholder text in muted color) */
+    .placeholder-headline { font-size: 110px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; max-width: 1500px; color: #3A3A3F; }
+    .placeholder-sub      { font-size: 32px; color: #3A3A3F; margin-top: 32px; max-width: 1100px; line-height: 1.4; }
+
+    .footer { display: flex; justify-content: space-between; align-items: flex-end; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #F2F0EE; opacity: 0.85; }
+    .by  { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #7A7770; letter-spacing: 0.2em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="head">
+    <div class="brand">
+      <div class="mark">✱</div>
+      <div>
+        <div class="name">AsterScan</div>
+        <div class="meta">Aster Chain block explorer</div>
+      </div>
+    </div>
+    <div class="copy-tag">Title card · 1920 × 1080</div>
+  </div>
+
+  <div>
+    <div class="placeholder-headline">Headline goes here</div>
+    <div class="placeholder-sub">Subtitle / description placeholder. Designer fills with the actual hook.</div>
+  </div>
+
+  <div class="footer">
+    <div class="url">aster-scan.com</div>
+    <div class="by">Built by Kairos Lab</div>
+  </div>
+</div>
+
+</body>
+</html>

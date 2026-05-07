@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan — Twitter Banner 1500×500</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .banner {
+      width: 1500px; height: 500px;
+      background:
+        radial-gradient(ellipse at right, rgba(244, 213, 177, 0.10), transparent 50%),
+        linear-gradient(120deg, #0E0E0F 0%, #161618 100%);
+      color: #F2F0EE;
+      padding: 80px 100px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; overflow: hidden;
+      border-radius: 16px;
+    }
+    /* Twitter / X profile picture overlap zone (avatar circle is bottom-left, ~200×200 px). Designer: don't put critical content in this zone. */
+    .avatar-safe {
+      position: absolute; bottom: 0; left: 0;
+      width: 240px; height: 240px;
+      border: 1px dashed rgba(244, 213, 177, 0.18);
+      border-radius: 50%; transform: translate(-50%, 60%);
+      pointer-events: none;
+    }
+    .left { display: flex; flex-direction: column; gap: 12px; }
+    .name { font-size: 56px; font-weight: 800; letter-spacing: -0.025em; }
+    .name .accent {
+      background: linear-gradient(120deg, #F4D5B1, #FFD29F);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .tag { font-size: 18px; color: #B9B5B0; letter-spacing: -0.005em; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; }
+    .right .mark {
+      width: 180px; height: 180px;
+      background: linear-gradient(135deg, #F4D5B1, #FFD29F);
+      border-radius: 32px;
+      display: grid; place-items: center;
+      color: #0E0E0F; font-weight: 800; font-size: 96px;
+      box-shadow: 0 0 120px rgba(244, 213, 177, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="avatar-safe"></div>
+
+  <div class="left">
+    <div class="name">Read every move<br/>on <span class="accent">Aster.</span></div>
+    <div class="tag">Independent block explorer · built by Kairos Lab</div>
+    <div class="url">aster-scan.com</div>
+  </div>
+
+  <div class="right">
+    <div class="mark">✱</div>
+  </div>
+</div>
+
+</body>
+</html>

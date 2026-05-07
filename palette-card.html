@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan — Brand Palette</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* Self-contained — print-ready, no external assets. Open in any
+       browser → Cmd/Ctrl+P → Save as PDF. The designer can also
+       just take a screenshot of this in landscape A4. */
+    @page { size: A4 landscape; margin: 1.2cm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #0E0E0F;
+      color: #F2F0EE;
+      padding: 32px 36px;
+      min-height: 100vh;
+    }
+    .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+    h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+    .meta { font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; }
+    .group { margin-top: 22px; }
+    .group h2 {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #B9B5B0; margin-bottom: 10px;
+    }
+    .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .swatch { background: var(--c); border-radius: 14px; padding: 18px; min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,0.05); }
+    .swatch.dark { color: #F2F0EE; }
+    .swatch.light { color: #0E0E0F; }
+    .swatch .name { font-weight: 700; font-size: 14px; }
+    .swatch .role { font-size: 10px; opacity: 0.78; line-height: 1.3; margin-top: 4px; }
+    .swatch .hex  { font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.85; }
+    .footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid #26262A; font-size: 11px; color: #7A7770; display: flex; justify-content: space-between; }
+  </style>
+</head>
+<body>
+
+  <div class="head">
+    <h1>AsterScan — Brand Palette</h1>
+    <span class="meta">v 2026-05-07 · all values in HEX</span>
+  </div>
+
+  <div class="group">
+    <h2>Core / Primary</h2>
+    <div class="row">
+      <div class="swatch light" style="--c:#F4D5B1">
+        <div><div class="name">primary</div><div class="role">CTAs, brand highlights, links</div></div>
+        <div class="hex">#F4D5B1</div>
+      </div>
+      <div class="swatch light" style="--c:#FFD29F">
+        <div><div class="name">primary-hover</div><div class="role">Hover state, slightly warmer</div></div>
+        <div class="hex">#FFD29F</div>
+      </div>
+      <div class="swatch light" style="--c:#FFE5C5">
+        <div><div class="name">primary-light</div><div class="role">Soft tint, glows, backgrounds</div></div>
+        <div class="hex">#FFE5C5</div>
+      </div>
+      <div class="swatch dark" style="--c:#0E0E0F">
+        <div><div class="name">background</div><div class="role">Body — true near-black</div></div>
+        <div class="hex">#0E0E0F</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>Surfaces &amp; Borders</h2>
+    <div class="row">
+      <div class="swatch dark" style="--c:#161618">
+        <div><div class="name">surface</div><div class="role">Default — cards, sections</div></div>
+        <div class="hex">#161618</div>
+      </div>
+      <div class="swatch dark" style="--c:#1C1C1F">
+        <div><div class="name">surface-raised</div><div class="role">Elevated — modals, cards</div></div>
+        <div class="hex">#1C1C1F</div>
+      </div>
+      <div class="swatch dark" style="--c:#252528">
+        <div><div class="name">surface-overlay</div><div class="role">Hover rows, dropdowns</div></div>
+        <div class="hex">#252528</div>
+      </div>
+      <div class="swatch dark" style="--c:#3A3A3F">
+        <div><div class="name">border-strong</div><div class="role">Focus, emphasis</div></div>
+        <div class="hex">#3A3A3F</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>Text</h2>
+    <div class="row">
+      <div class="swatch dark" style="--c:#161618; color:#F2F0EE">
+        <div><div class="name">text-primary</div><div class="role" style="color:#B9B5B0">Headlines, key numbers</div></div>
+        <div class="hex">#F2F0EE</div>
+      </div>
+      <div class="swatch dark" style="--c:#161618; color:#B9B5B0">
+        <div><div class="name">text-secondary</div><div class="role">Body</div></div>
+        <div class="hex">#B9B5B0</div>
+      </div>
+      <div class="swatch dark" style="--c:#161618; color:#7A7770">
+        <div><div class="name">text-muted</div><div class="role">Captions, labels</div></div>
+        <div class="hex">#7A7770</div>
+      </div>
+      <div class="swatch dark" style="--c:#161618">
+        <div><div class="name">— gradient —</div><div class="role">primary → primary-hover</div></div>
+        <div class="hex">linear(#F4D5B1 → #FFD29F)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h2>Semantic</h2>
+    <div class="row">
+      <div class="swatch dark" style="--c:#22C55E">
+        <div><div class="name">success</div><div class="role">Long, gain, positive PnL</div></div>
+        <div class="hex">#22C55E</div>
+      </div>
+      <div class="swatch dark" style="--c:#EF4444">
+        <div><div class="name">danger</div><div class="role">Short, loss, liquidation</div></div>
+        <div class="hex">#EF4444</div>
+      </div>
+      <div class="swatch dark" style="--c:#F59E0B">
+        <div><div class="name">warning</div><div class="role">Cliff, alert, caution</div></div>
+        <div class="hex">#F59E0B</div>
+      </div>
+      <div class="swatch dark" style="--c:#3B82F6">
+        <div><div class="name">info</div><div class="role">Informational</div></div>
+        <div class="hex">#3B82F6</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>AsterScan press kit · brand@kairos-lab.org</span>
+    <span>Source: tailwind.config.ts + app/globals.css</span>
+  </div>
+
+</body>
+</html>

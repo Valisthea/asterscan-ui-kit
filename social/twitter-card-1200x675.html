@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan — Twitter Card 1200×675 (empty)</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .card {
+      width: 1200px; height: 675px;
+      background:
+        radial-gradient(ellipse at bottom left, rgba(244, 213, 177, 0.10), transparent 60%),
+        linear-gradient(180deg, #0E0E0F 0%, #161618 100%);
+      color: #F2F0EE;
+      padding: 60px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+      border-radius: 16px;
+    }
+    .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, #F4D5B1, #FFD29F, transparent); }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand .mark { width: 50px; height: 50px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); border-radius: 12px; display: grid; place-items: center; color: #0E0E0F; font-weight: 800; font-size: 26px; }
+    .brand .name { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+    .brand .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7A7770; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+
+    .placeholder-h { font-size: 56px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; color: #3A3A3F; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 18px; opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand">
+    <div class="mark">✱</div>
+    <div>
+      <div class="name">AsterScan</div>
+      <div class="meta">Aster Chain block explorer</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="placeholder-h">Headline placeholder.</div>
+  </div>
+
+  <div class="url">aster-scan.com</div>
+</div>
+
+</body>
+</html>

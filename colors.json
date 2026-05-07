@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/anything",
+  "meta": {
+    "name": "AsterScan brand palette",
+    "version": "2026-05-07",
+    "source": "tailwind.config.ts + app/globals.css CSS vars",
+    "notes": "All colors are RGB triplets in the CSS vars. The HEX values below are the rendered output at full alpha. Use these directly in design tools."
+  },
+  "core": {
+    "primary":      { "hex": "#F4D5B1", "rgb": [244, 213, 177], "role": "Primary accent — CTAs, brand highlights, links" },
+    "primaryHover": { "hex": "#FFD29F", "rgb": [255, 210, 159], "role": "Primary hover state — slightly warmer" },
+    "primaryLight": { "hex": "#FFE5C5", "rgb": [255, 229, 197], "role": "Primary tint — soft surfaces, glows" }
+  },
+  "surface": {
+    "background":      { "hex": "#0E0E0F", "rgb": [14,  14,  15],  "role": "Body background — true near-black" },
+    "surface":         { "hex": "#161618", "rgb": [22,  22,  24],  "role": "Default surface — cards, sections" },
+    "surfaceRaised":   { "hex": "#1C1C1F", "rgb": [28,  28,  31],  "role": "Raised surface — elevated cards, modals" },
+    "surfaceOverlay":  { "hex": "#252528", "rgb": [37,  37,  40],  "role": "Overlay surface — hover states, hover rows" }
+  },
+  "border": {
+    "border":         { "hex": "#26262A", "rgb": [38, 38, 42], "role": "Default border — cards, dividers" },
+    "borderStrong":   { "hex": "#3A3A3F", "rgb": [58, 58, 63], "role": "Strong border — focus, emphasis" }
+  },
+  "text": {
+    "primary":   { "hex": "#F2F0EE", "rgb": [242, 240, 238], "role": "Primary text — headlines, key numbers" },
+    "secondary": { "hex": "#B9B5B0", "rgb": [185, 181, 176], "role": "Body text" },
+    "muted":     { "hex": "#7A7770", "rgb": [122, 119, 112], "role": "Muted text — captions, labels" }
+  },
+  "semantic": {
+    "success": { "hex": "#22C55E", "rgb": [34,  197, 94 ], "role": "Long, gain, positive PnL" },
+    "danger":  { "hex": "#EF4444", "rgb": [239, 68,  68 ], "role": "Short, loss, liquidation, error" },
+    "warning": { "hex": "#F59E0B", "rgb": [245, 158, 11 ], "role": "Cliff, alert, caution" },
+    "info":    { "hex": "#3B82F6", "rgb": [59,  130, 246], "role": "Informational" }
+  },
+  "fonts": {
+    "sans":     { "family": "DM Sans",       "fallback": "TT Turns, system-ui, sans-serif", "use": "UI, body, headlines" },
+    "mono":     { "family": "JetBrains Mono","fallback": "Fira Code, ui-monospace",          "use": "Numbers, addresses, prices" }
+  }
+}

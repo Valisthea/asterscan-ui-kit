@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AsterScan — Lower Third 1920×1080</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Lower-third overlay — most of the frame is transparent so the
+       designer composites this on top of underlying footage. */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #2a2a2c; padding: 24px; font-family: 'DM Sans', system-ui, sans-serif; }
+    .frame {
+      width: 1920px; height: 1080px;
+      background:
+        linear-gradient(180deg, transparent 0%, transparent 75%, rgba(14, 14, 15, 0.85) 92%, rgba(14, 14, 15, 0.95) 100%);
+      color: #F2F0EE;
+      position: relative; overflow: hidden;
+      border: 1px dashed #3A3A3F;
+    }
+    .ll {
+      position: absolute; bottom: 80px; left: 80px; max-width: 760px;
+      padding: 28px 36px;
+      background: rgba(22, 22, 24, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid #26262A;
+      border-radius: 14px;
+      border-left: 3px solid #F4D5B1;
+    }
+    .ll .name { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; }
+    .ll .role { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #B9B5B0; margin-top: 6px; letter-spacing: 0.04em; }
+
+    .stat-tag {
+      position: absolute; top: 80px; right: 80px;
+      padding: 16px 24px; min-width: 280px;
+      background: rgba(22, 22, 24, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid #26262A;
+      border-radius: 14px;
+    }
+    .stat-tag .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: #7A7770; }
+    .stat-tag .val { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: #F2F0EE; margin-top: 4px; letter-spacing: -0.01em; }
+    .stat-tag .val.success { color: #22C55E; }
+    .stat-tag .val.danger  { color: #EF4444; }
+
+    .branding { position: absolute; bottom: 40px; right: 40px; display: flex; align-items: center; gap: 12px; }
+    .branding .mk { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #F4D5B1, #FFD29F); display: grid; place-items: center; color: #0E0E0F; font-weight: 800; }
+    .branding .nm { font-size: 14px; font-weight: 600; opacity: 0.85; }
+
+    .ghosthint { position: absolute; top: 24px; left: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #3A3A3F; letter-spacing: 0.16em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="ghosthint">Lower-third overlay · 1920 × 1080 · transparent above the gradient</div>
+
+  <div class="ll">
+    <div class="name">Speaker / chapter title</div>
+    <div class="role">role · context · etc.</div>
+  </div>
+
+  <div class="stat-tag">
+    <div class="lbl">Stat callout</div>
+    <div class="val success">+$397M</div>
+  </div>
+
+  <div class="branding">
+    <div class="mk">✱</div>
+    <div class="nm">aster-scan.com</div>
+  </div>
+</div>
+
+</body>
+</html>
