@@ -263,41 +263,16 @@
     </div>
 
     <!-- ── LOGO ─────────────────────────────────────── -->
-    <h2 id="logos">Marks <span class="src">/logos/*.svg</span></h2>
+    <h2 id="logos">Marks <span class="src">/logos/asterscan-icon-mark.svg</span></h2>
     <div class="grid grid-3">
-      <!--
-        Previews render the lockup with HTML+CSS so the JetBrains Mono webfont
-        loaded by this page is used. The downloaded SVG embeds the same font
-        via @import — but local apps without the font installed will fall back.
-      -->
-      <a class="preview-card" href="/logos/asterscan-logo-compact.svg" target="_blank">
-        <div class="visual bg-light" style="background:#FFFFFF; padding:0;">
-          <div style="display:flex; align-items:center; gap:14px; padding:0 30px;">
-            <img src="/logos/asterscan-icon-mark.svg" alt="" style="width:56px; height:56px;" />
-            <span class="wordmark" style="font-size:22px; font-family:'JetBrains Mono',monospace; letter-spacing:0.14em; display:inline-flex; align-items:baseline; gap:1px;">
-              <span style="font-weight:700; color:#e6bc8b;">ASTER</span><span style="font-weight:400; color:#a08560; opacity:0.8;">SCAN</span>
-            </span>
-          </div>
-        </div>
-        <div class="meta-bar"><span class="label">Compact</span><span class="dim">asterscan-logo-compact.svg</span></div>
-      </a>
-      <a class="preview-card" href="/logos/asterscan-logo-white.svg" target="_blank">
-        <div class="visual" style="background:#0E0E0F; padding:0;">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-            <img src="/logos/asterscan-icon-mark.svg" alt="" style="width:80px; height:80px;" />
-            <div style="text-align:center; line-height:1.05;">
-              <div style="font-family:'JetBrains Mono',monospace; font-weight:700; font-size:28px; letter-spacing:0.18em; color:#FFFFFF;">ASTER</div>
-              <div style="font-family:'JetBrains Mono',monospace; font-weight:400; font-size:28px; letter-spacing:0.18em; color:#FFFFFF; opacity:0.6;">SCAN</div>
-            </div>
-          </div>
-        </div>
-        <div class="meta-bar"><span class="label">White tile</span><span class="dim">asterscan-logo-white.svg</span></div>
-      </a>
       <a class="preview-card" href="/logos/asterscan-icon-mark.svg" target="_blank">
         <div class="visual bg-mid"><img src="/logos/asterscan-icon-mark.svg" alt="" style="max-height: 100px;" /></div>
         <div class="meta-bar"><span class="label">Icon mark</span><span class="dim">asterscan-icon-mark.svg</span></div>
       </a>
     </div>
+    <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7A7770; margin-top:8px;">
+      For the full lockup (icon + wordmark) use the <a href="#lockup">live HTML render below</a> — the wordmark is rendered with JetBrains Mono via CSS, matching the live navbar exactly.
+    </p>
 
     <h2 id="lockup">Lockup <span class="src">src/components/layout/Navbar.tsx</span></h2>
     <div class="lockup">
